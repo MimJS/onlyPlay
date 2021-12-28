@@ -15,7 +15,9 @@ html,
 #root {
     height: 100%;
 }
-
+.vkuiTabbarItem__in{
+    transform: scale(1) !important;
+}
 .panel--in {
     padding: 10px 16px;
     .notification {

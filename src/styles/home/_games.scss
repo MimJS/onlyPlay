@@ -29,7 +29,7 @@ body[scheme="space_gray"] {
             &:nth-child(2n) {
                 margin-left: 10px;
             }
-            &:not(:last-child):not(:nth-last-child(2)) {
+            &:not(:last-child) {
                 margin-bottom: 10px;
             }
             .bg {
