@@ -1,6 +1,6 @@
 @import "./home/index";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-@import "./util", "./preloader", "./modals", "./scheme", './createTeam/index';
+@import "./util", "./preloader", "./modals", "./scheme", './createTeam/index', './transfer/index';
 body {
     margin: 0px;
     --br: 10px; // border radius
@@ -17,6 +17,13 @@ html,
 }
 .vkuiTabbarItem__in{
     transform: scale(1) !important;
+    outline: none !important;
+}
+.vkuiTappable--active-background {
+    background: transparent !important;
+}
+.vkuiTabbarItem__tappable {
+    padding: 0px !important
 }
 .panel--in {
     padding: 10px 16px;
@@ -69,4 +76,9 @@ html,
             padding-left: 4px !important;
         }
     }
+}
+
+.verticalText {
+    display: flex;
+    align-items: center;
 }

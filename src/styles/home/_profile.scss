@@ -4,12 +4,13 @@ body[scheme="space_gray"]{
             .up_text {
                 span {
                     mix-blend-mode: screen;
+                    color:black
                 }
             }
         }
         .online {
             .in {
-                color:white;
+                color:#76787a;
             }
         }
     }
@@ -197,7 +198,7 @@ body[scheme="space_gray"]{
             width: fit-content;
             align-items: center;
             font-size: 13px;
-            color: black;
+            color: #818c99;
             font-weight: 400;
             display: flex;
             //background:#F7F7F7;

@@ -362,11 +362,16 @@ const MainHome = ({ id, updateUser, openGame, openView }) => {
             before={<Icon24MoneyTransfer />}
             onClick={() => {
               window.open(
-                `https://vk.com/coin#x521577793_${
-                  coinInSum * 1000
-                }_2000000000_1`,
+                `https://vk.com/coin#x650454742_${coinInSum * 1000}_7777_1`,
                 "_blank"
               );
+              dispatch({
+                type: "updateModal",
+                payload: {
+                  id: "profile",
+                  name: null,
+                },
+              });
             }}
           >
             ПОПОЛНИТЬ
@@ -446,49 +451,48 @@ const MainHome = ({ id, updateUser, openGame, openView }) => {
         activeStory={ui.activeUnder}
         tabbar={
           Object.keys(user.db).length > 0 && (
-              <Tabbar>
-                <TabbarItem
-                  onClick={() => setSub("profile")}
-                  selected={ui.activeUnder === "profile"}
-                  text="Профиль"
-                >
-                  <Icon28UserCircleOutline />
-                </TabbarItem>
-                <TabbarItem
-                  onClick={() => setSub("teams")}
-                  selected={ui.activeUnder === "teams"}
-                  text="Команды"
-                >
-                  <Icon28Users3Outline />
-                </TabbarItem>
-                <TabbarItem
-                  onClick={() => setSub("games")}
-                  selected={ui.activeUnder === "games"}
-                  text="Играть"
-                >
-                  <Icon28GameOutline />
-                </TabbarItem>
-                <TabbarItem
-                  onClick={() => setSub("rating")}
-                  selected={ui.activeUnder === "rating"}
-                  text="Рейтинг"
-                >
-                  <Icon28PollSquareOutline />
-                </TabbarItem>
-                <TabbarItem
-                  onClick={() => setSub("more")}
-                  selected={ui.activeUnder === "more"}
-                  text="Ещё"
-                >
-                  <Icon28More />
-                </TabbarItem>
-              </Tabbar>
-  
+            <Tabbar>
+              <TabbarItem
+                onClick={() => setSub("profile")}
+                selected={ui.activeUnder === "profile"}
+                text="Профиль"
+              >
+                <Icon28UserCircleOutline />
+              </TabbarItem>
+              <TabbarItem
+                onClick={() => setSub("teams")}
+                selected={ui.activeUnder === "teams"}
+                text="Команды"
+              >
+                <Icon28Users3Outline />
+              </TabbarItem>
+              <TabbarItem
+                onClick={() => setSub("games")}
+                selected={ui.activeUnder === "games"}
+                text="Играть"
+              >
+                <Icon28GameOutline />
+              </TabbarItem>
+              <TabbarItem
+                onClick={() => setSub("rating")}
+                selected={ui.activeUnder === "rating"}
+                text="Рейтинг"
+              >
+                <Icon28PollSquareOutline />
+              </TabbarItem>
+              <TabbarItem
+                onClick={() => setSub("more")}
+                selected={ui.activeUnder === "more"}
+                text="Ещё"
+              >
+                <Icon28More />
+              </TabbarItem>
+            </Tabbar>
           )
         }
       >
         <View id="profile" activePanel="profile" modal={profileModal}>
-          <Profile id="profile" updateUser={updateUser} />
+          <Profile id="profile" updateUser={updateUser} openView={openView} />
         </View>
         <View id="more" activePanel="more" modal={moreModal}>
           <More id="more" />

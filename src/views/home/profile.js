@@ -16,7 +16,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import util from "../../lib/util";
 
-const Profile = ({ id, updateUser }) => {
+const Profile = ({ id, updateUser, openView }) => {
   const user = useSelector((s) => s.user);
   const dispatch = useDispatch();
   const config = useSelector((s) => s.config);
@@ -85,7 +85,7 @@ const Profile = ({ id, updateUser }) => {
                 </div>
               </div>
             </div>
-            <div className="block--transfer">
+            <div className="block--transfer" onClick={() => openView('transfer')}>
               <Icon28SendOutline width={48} height={48} />
               <span className="text">Перевести другу</span>
             </div>
