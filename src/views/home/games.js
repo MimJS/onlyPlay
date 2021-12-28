@@ -10,7 +10,7 @@ const Games = ({ id, openGame }) => {
           Игры
         </PanelHeaderContent>
       </PanelHeader>
-      <div className="panel--in game--l ist">
+      <div className="panel--in game--list">
         <Game gameName="Double dice" onlineCount={1} className="game--doubleDice"/>
         <Game gameName="Dice" onlineCount={96} className="game--dice"/>
         <Game gameName="Dream Catcher" onlineCount={1} className="game--dreamCatcher"/>
