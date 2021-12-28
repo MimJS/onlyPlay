@@ -81,6 +81,11 @@ body[scheme="space_gray"] {
                 text-transform: uppercase;
             }
         }
+        .game--doubleDice {
+            .bg {
+                background: url("../../img/doubleDice.jpg");
+            }
+        }
         .game--ninja {
             .bg {
                 background: url("../../img/ninja.jpg");
