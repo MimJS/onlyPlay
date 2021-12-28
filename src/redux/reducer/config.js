@@ -1,5 +1,9 @@
 const init = {
+<<<<<<< Updated upstream
   xhr_url: "https://59c7a0d6dacb47.localhost.run/server/api.php",
+=======
+  xhr_url: "https://e2503fce6a6c99.localhost.run/server/api.php",
+>>>>>>> Stashed changes
   globalData: {},
   loading: false
 };
