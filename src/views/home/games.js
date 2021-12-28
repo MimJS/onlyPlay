@@ -18,7 +18,7 @@ const Games = ({ id, openGame }) => {
         <Game gameName="Tower" onlineCount={1} className="game--tower"/>
         <Game gameName="Keno" onlineCount={1} className="game--keno"/>
         <Game gameName="Под 7 над" onlineCount={1} className="game--b7m"/>
-        <Game gameName="Dicewheel" onlineCount={1} className="game--dicewheel"/>
+        <Game gameName="Dicewheel" onlineCount={1} className="game--dicewheel"/> 
         <Game gameName="Thimble" onlineCount={1} className="game--thimble"/>
       </div>
     </Panel>

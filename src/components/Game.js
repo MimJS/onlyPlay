@@ -6,7 +6,7 @@ const Game = ({gameName, onlineCount, className}) => {
           <div className="bg">
             <div className="online">
                 {onlineCount}
-                <div className={`blob ${onlineCount && "green"}`}/>
+                <div className={`blob ${onlineCount>0 && "green"}`}/>
             </div>
           </div>
           <div className="name">{gameName}</div>
