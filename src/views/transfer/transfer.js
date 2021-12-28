@@ -3,6 +3,8 @@ import {
     PanelHeader,
     PanelHeaderContent,
     PanelHeaderBack,
+    FixedLayout,
+    Search,
   } from "@vkontakte/vkui";
 
 const Transfer = ({ id, close }) => {
@@ -12,10 +14,15 @@ const Transfer = ({ id, close }) => {
         <PanelHeaderContent
           before={<PanelHeaderBack hasHover={false} onClick={() => close()} />}
         >
-          Создание команды
+          Перевод другу
         </PanelHeaderContent>
       </PanelHeader>
-      <div className="panel--in"></div>
+      <FixedLayout vertical="top">
+          <Search placeholder="Поиск"/>
+      </FixedLayout>
+      <div className="panel--in">
+
+      </div>
     </Panel>
   );
 };
