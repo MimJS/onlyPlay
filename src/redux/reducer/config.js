@@ -1,8 +1,7 @@
 const init = {
-  xhr_url: "https://18d084e3999724.localhost.run/server/api.php",
+  xhr_url: "https://59c7a0d6dacb47.localhost.run/server/api.php",
   globalData: {},
   loading: false,
-  theme: "bright_light",
 };
 
 export const configReducer = (state = init, action) => {
