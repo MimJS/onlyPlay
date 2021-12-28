@@ -1,0 +1,70 @@
+@import "./home/index";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import "./util", "./preloader", "./modals", "./scheme", './createTeam/index';
+body {
+    margin: 0px;
+    --br: 10px; // border radius
+}
+
+* {
+    font-family: Roboto !important;
+}
+
+body,
+html,
+#root {
+    height: 100%;
+}
+
+.panel--in {
+    padding: 10px 16px;
+    .notification {
+        background: #f7f7f7;
+        border-radius: var(--br);
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        .title {
+            font-weight: 500;
+            font-size: 18px;
+        }
+        .text {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    }
+}
+
+.vkuiPanelHeader--ios .vkuiPanelHeader__left {
+    flex-grow: 0;
+}
+
+#mainhome {
+    .vkuiPanelHeader__content {
+        padding-left: 12px;
+        .vkuiSimpleCell__description {
+            margin-top: 1px !important;
+        }
+    }
+}
+
+.vkuiPanel__in {
+    //background: url("../img/bg.jpg");
+    background-size: 200px 200px;
+}
+
+#game {
+    .vkuiPanelHeader--ios {
+        .vkuiPanelHeader__left {
+            padding: 0px !important;
+        }
+    }
+    .vkuiPanelHeader--android {
+        .vkuiPanelHeaderContent__before {
+            margin-right: 6px !important;
+        }
+        .vkuiPanelHeader__content {
+            padding-left: 4px !important;
+        }
+    }
+}

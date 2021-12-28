@@ -1,0 +1,23 @@
+%background-center-cover {
+    background-position: center center !important;
+    background-size: cover !important;
+}
+
+%shadow {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+%ny_border {
+    box-sizing: border-box;
+    border: 4px white solid;
+}
+
+%button_click {
+    & {
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    &:active {
+        transform: scale(0.95);
+    }
+}

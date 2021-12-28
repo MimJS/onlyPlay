@@ -1,0 +1,28 @@
+$photos: (
+    "0": "../img/b7m.png",
+    "1": "../img/dicewheel.png",
+    "2": "../img/thimble.png",
+    "3": "../img/dreamCatcher.jpg",
+    "4": "../img/dice.png",
+    "5": "../img/tower.jpg",
+    "6": "../img/keno.jpg",
+    "7": "../img/ninja.jpg",
+    "8": "",
+    "9": "",
+    "10": "",
+    "11": "",
+    "12": "",
+    "13": "",
+    "14": "",
+    "15": "",
+);
+
+.preloader {
+    @each $id, $url in $photos {
+        @if $url != "" {
+            .item#{$id} {
+                background: url(#{$url});
+            }
+        }
+    }
+}

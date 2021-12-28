@@ -1,0 +1,14 @@
+#more {
+    .SimpleCell {
+        background:var(--menu_button_background);
+        border-radius: var(--br);
+        &:not(:first-child) {
+            margin-top: 10px;
+        }
+    }
+    .Link {
+        .SimpleCell {
+            margin-top: 10px;
+        }
+    }
+}

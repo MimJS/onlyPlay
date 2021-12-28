@@ -1,0 +1,12 @@
+body[scheme="space_gray"] {
+    .vkuiModalPage__in {
+        background: var(--modal_background);
+    }
+}
+
+.vkuiModalPage__in {
+    background: var(--modal_background);
+    width: 100%;
+    margin:0;
+    border-radius: var(--br) var(--br) 0 0 !important;
+}

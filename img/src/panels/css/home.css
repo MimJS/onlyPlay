@@ -1,0 +1,379 @@
+/* profile CSS */
+
+.profile .paddingControlWrapper {
+    padding: 0 var(--padding_left_vk);
+}
+.profile .balanceWrapper {
+    background: var(--events_card_color_bg);
+    border-radius: 12px;
+    margin: 10px 0;
+}
+
+.profile .balanceWrapper .balance {
+    position: relative;
+    border-radius: 12px;
+    text-align: center;
+    padding: 30px 10px;
+    font-size: 37px;
+    font-weight: 300;
+    background: url(https://coin-games.store/static/media/balance.18aaf42f.png) 50% no-repeat;
+    background-size: cover;
+    color: #fff;
+}
+
+.profile .balanceWrapper .balance .coinsTop {
+    font-size: 14px;
+    font-weight: 500;
+    opacity: .7;
+    color: #fff;
+}
+
+.profile .balanceWrapper .balance .coins {
+    line-height: 30px;
+    margin-top: 5px;
+}
+
+.profile .balanceWrapper .balance .vkIcon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 6px;
+}
+
+.profile .balanceButtons {
+    margin-bottom: 10px;
+}
+
+.profile .balanceButtons .but.buy {
+    margin-right: 5px;
+    color: #fff;
+    background: url(https://coin-games.store/static/media/buy.5d9219d5.png) 50% no-repeat;
+    background-size: cover;
+}
+
+.profile .balanceButtons .but {
+    display: inline-block;
+    width: calc(50% - 5px);
+    border-radius: 12px;
+    text-align: center;
+    padding: 10px 0;
+    color: var(--bw_color_text_lite);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    transition: all .1s linear;
+    opacity: 1;
+}
+
+.profile .balanceButtons .but span {
+    margin-top: 5px;
+    display: block;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.profile .balanceButtons .but .Icon {
+    display: inline-block;
+}
+
+.profile .balanceButtons .but.sell {
+    margin-left: 5px;
+    color: #fff;
+    background: url(https://coin-games.store/static/media/sell.ad27209a.png) 50% no-repeat;
+    background-size: cover;
+}
+
+/* статистика css */
+
+.profile .statsBlock {
+    padding: 0 var(--padding_left_vk);
+}
+
+.profile .statsBlock .stat {
+    margin-top: 10px;
+    text-align: center;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+.profile .statsBlock .stat.today {
+    background: url(https://coin-games.store/static/media/stat_win.06a84622.jpg) no-repeat 50%;
+    background-size: cover;
+}
+.profile .statsBlock .stat.all {
+    background: url(https://coin-games.store/static/media/stat_win_all.3447b323.jpg) no-repeat 50%;
+    background-size: cover;
+}
+
+.profile .statsBlock .stat .blockTitleWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.profile .statsBlock .stat .blockTitleWrapper .blockTitle {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    background: #fff;
+    color: #000;
+    mix-blend-mode: screen;
+    border-radius: 0 0 12px 12px;
+}
+
+.profile .statsBlock .stat .updateMode {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #fff;
+    color: rgba(236,64,122,.8);
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 12px;
+    padding: 5px;
+}
+
+
+
+.profile .statsBlock .stat .winBlock {
+    background: rgba(3,169,244,.8);
+    border-bottom-left-radius: 12px;
+    border-top-left-radius: 12px;
+}
+
+
+
+.profile .statsBlock .stat .sum {
+    margin-top: 5px;
+    font-weight: 300;
+    font-size: 21px;
+}
+
+.profile  .statsBlock .stat .loseBlock,  .profile .statsBlock .stat .winBlock {
+    display: inline-block;
+    padding: 50px 0 40px;
+    color: #fff;
+    transition: all .2s linear;
+}
+
+.profile .statsBlock .stat .loseBlock {
+    background: rgba(236,64,122,.8);
+    border-bottom-right-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.profile .balanceButtons .but:active {
+    -webkit-transform: scale(.9);
+    transform: scale(.9);
+    opacity: .7;
+}
+
+/* низ */
+
+.Footer {
+    margin: 24px 0;
+    font-size: 13px;
+    color: #818c99;
+    color: var(--text_secondary);
+    line-height: 16px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.Div.Footer {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+
+
+/* More CSS */
+
+.more .Cell.firstItem {
+    padding-top: 0;
+}
+
+.more .Cell .Icon {
+    padding: 0px 16px 0px 0;
+}
+
+.more .Cell {
+    padding: 5px var(--padding_left_vk);
+}
+
+.more .vkuiSimpleCell {
+    background: var(--events_card_color_bg);
+    border-radius: 12px;
+}
+
+.more .SimpleCell__content h3 {
+    font-size:16px
+}
+
+.more .vkuiSimpleCell {
+    min-height: 42px;
+}
+
+/* Games CSS */
+
+.gamesView .panel {
+    padding-right: var(--padding_left_vk);
+}
+
+.gamesView .panel .List {
+    text-align: center;
+}
+
+.gamesView .panel .room {
+    width: calc(50% - var(--padding_left_vk));
+    display: inline-block;
+    text-align: center;
+    background: var(--events_card_color_bg);
+    padding: 0;
+    border-radius: 12px;
+    margin-left: var(--padding_left_vk);
+    margin-bottom: var(--padding_left_vk);
+    transition: all .1s linear;
+}
+
+.gamesView .panel .room .bg {
+    width: 100%;
+    height: 100px;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+}
+
+.gamesView .panel .room.wheel .bg {
+    background: url(https://coin-games.store/static/media/wheel.eb1626bc.png) no-repeat 50%;
+    background-size: cover;
+}
+
+.gamesView .panel .room .text {
+    font-size: 18px;
+    line-height: 30px;
+    font-weight: 300;
+    text-align: center;
+    color: var(--bw_color_text);
+    text-transform: uppercase;
+}
+
+.gamesView .panel .room.dice .bg {
+    background: url(https://coin-games.store/static/media/dice.63aaf0ff.png) no-repeat 50%;
+    background-size: cover;
+}
+
+.gamesView .panel .room:active {
+    -webkit-transform: scale(.9);
+    transform: scale(.9);
+    opacity: .7;
+}
+
+.gamesView .panel .room.double .bg {
+    background: url(https://coin-games.store/static/media/double.4943a1c4.jpg) no-repeat 50%;
+    background-size: cover;
+}
+
+.gamesView .panel .room.n1 .bg {
+    background: url(https://coin-games.store/static/media/dice1.c8b7d73f.png) no-repeat 50%;
+    background-size: cover;
+}
+
+/* Rating CSS */
+
+#rating .ratingBanner {
+    background: url(https://coin-games.store/static/media/rating.d06b5622.png) 50% no-repeat;
+    background-size: cover;
+    border-radius: 12px;
+    margin-top: 10px;
+    padding: 15px;
+}
+
+#rating .ratingBanner .title {
+    color: #fff;
+    font-size: 21px;
+    font-weight: 600;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+#rating .ratingBanner .desc {
+    margin-top: 10px;
+    color: #f5f5f5;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+#rating .ratingBanner .bottom {
+    display: -webkit-flex;
+    display: flex;
+    margin-top: 20px;
+}
+
+#rating .ratingBanner .title .text {
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+#rating .ratingBanner .desc .sum {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#rating .ratingBanner .bottom .bank, #rating .ratingBanner .bottom .time {
+    width: 100%;
+    text-align: center;
+    color: #f5f5f5;
+}
+
+#rating .ratingBanner .bottom .sep {
+    width: 2px;
+    height: 30px;
+    background: #f5f5f5;
+    opacity: .5;
+    margin-top: 5px;
+}
+
+#rating .ratingBanner .bottom .bank, #rating .ratingBanner .bottom .time {
+    width: 100%;
+    text-align: center;
+    color: #f5f5f5;
+}
+
+#rating .ratingBanner .bottom .bank .header, #rating .ratingBanner .bottom .time .header {
+    opacity: .7;
+    font-size: 11px;
+    font-weight: 400;
+}
+
+#rating .ratingBanner .bottom .bank .value, #rating .ratingBanner .bottom .time .value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffd54f;
+    white-space: nowrap;
+    padding: 0 10px;
+}
+
+#rating .List {
+    padding-top: 10px;
+}
+
+#rating .Div.Footer {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+#rating .Footer {
+    margin: 24px 0px;
+    font-size: 13px;
+    color: var(--text_secondary);
+    line-height: 16px;
+    font-weight: 400;
+    text-align: center;
+}

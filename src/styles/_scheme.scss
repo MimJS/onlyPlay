@@ -1,0 +1,21 @@
+body[scheme="bright_light"],
+body[scheme="vkcom_light"],
+body[scheme="vkcom_dark"] {
+    // variables
+    --menu_button_background: #e5e5e5;
+    --game_button_background: #e5e5e5;
+    --top_button_background: #e5e5e5;
+    --rating_disable_background: #e5e5e5;
+    --modal_background:white;
+    --stat_background:#e5e5e5;
+}
+
+body[scheme="space_gray"] {
+    // variables
+    --menu_button_background: #303030;
+    --game_button_background: #303030;
+    --top_button_background: #303030;
+    --rating_disable_background: #303030;
+    --modal_background:#19191a;
+    --stat_background:white;
+}
