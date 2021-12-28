@@ -17,6 +17,13 @@ html,
 }
 .vkuiTabbarItem__in{
     transform: scale(1) !important;
+    outline: none !important;
+}
+.vkuiTappable--active-background {
+    background: transparent !important;
+}
+.vkuiTabbarItem__tappable {
+    padding: 0px !important
 }
 .panel--in {
     padding: 10px 16px;
