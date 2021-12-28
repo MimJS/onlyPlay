@@ -364,7 +364,7 @@ const MainHome = ({ id, updateUser, openGame, openView }) => {
               window.open(
                 `https://vk.com/coin#x650454742_${
                   coinInSum * 1000
-                }_2000000000_7777`,
+                }_7777_1`,
                 "_blank"
               );
             }}
