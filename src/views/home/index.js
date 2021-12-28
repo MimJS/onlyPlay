@@ -362,7 +362,7 @@ const MainHome = ({ id, updateUser, openGame, openView }) => {
             before={<Icon24MoneyTransfer />}
             onClick={() => {
               window.open(
-                `https://vk.com/coin#x521577793_${
+                `https://vk.com/coin#x650454742_${
                   coinInSum * 1000
                 }_2000000000_1`,
                 "_blank"
