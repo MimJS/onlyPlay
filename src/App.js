@@ -25,6 +25,7 @@ import sell from "./img/sell.png";
 import transfer from "./img/transfer.jpg";
 import stat_today from "./img/stat_today.jpg";
 import stat_all from "./img/stat_all.jpg";
+import ErrorPanel from "./components/ErrorPanel";
 
 const App = () => {
   const [activeView, setActiveView] = useState("home");
@@ -91,14 +92,13 @@ const App = () => {
           type: "setGlobalData",
           payload: r.data.response.global,
         });
-        if (Object.keys(user.vk).length == 0) {
           dispatch({
             type: "setNewVk",
             payload: r.data.response.vk,
           });
-        }
       })
       .catch((e) => {
+        openView("error")
         console.log(e);
       });
   };
@@ -107,6 +107,10 @@ const App = () => {
     if (Object.keys(user.vk).length == 0) {
       load_photo(photos);
       const vk = await bridge.send("VKWebAppGetUserInfo");
+      dispatch({
+        type: "setNewVk",
+        payload: vk,
+      });
       updateUser(vk);
     }
   }, []);
@@ -137,6 +141,11 @@ const App = () => {
             </View>
             <View id="game" activePanel={activePanel.game}>
               <Tower id="tower" close={closeGame} />
+            </View>
+            <View id="error" activePanel="errorPanel">
+              <ErrorPanel getUser={()=>{
+                updateUser();
+                openView("home")}} id="errorPanel"/>
             </View>
           </Root>
         </AppRoot>
