@@ -492,7 +492,7 @@ const MainHome = ({ id, updateUser, openGame, openView }) => {
         }
       >
         <View id="profile" activePanel="profile" modal={profileModal}>
-          <Profile id="profile" updateUser={updateUser} />
+          <Profile id="profile" updateUser={updateUser} openView={openView} />
         </View>
         <View id="more" activePanel="more" modal={moreModal}>
           <More id="more" />

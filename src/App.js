@@ -13,6 +13,7 @@ import React, { useState, useEffect } from "react";
 import MainHome from "./views/home";
 import CreateTeam from "./views/createTeam/createTeam";
 import Tower from "./views/games/tower";
+import Transfer from "./views/transfer/transfer";
 
 import bridge from "@vkontakte/vk-bridge";
 import axios from "axios";
@@ -32,6 +33,7 @@ const App = () => {
     home: "mainhome",
     game: "",
     createTeam: "createTeam",
+    transfer: "transfer",
   });
 
   const config = useSelector((s) => s.config);
@@ -137,6 +139,9 @@ const App = () => {
             </View>
             <View id="game" activePanel={activePanel.game}>
               <Tower id="tower" close={closeGame} />
+            </View>
+            <View id="transfer" activePanel={activePanel.transfer}>
+              <Transfer id="transfer" close={closeGame} />
             </View>
           </Root>
         </AppRoot>
