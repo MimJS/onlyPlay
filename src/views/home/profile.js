@@ -30,9 +30,9 @@ const Profile = ({ id, updateUser, openView }) => {
       <PanelHeader separator={false}>
         <SimpleCell
           disabled
-          before={<Avatar size={40} src={user.vk.photo_100} />}
+          before={<Avatar size={40} src={Object.keys(user.db).length > 0 ? user.vk.photo_100 : ''} />}
           description={
-            Object.keys(user.vk).length > 0
+            Object.keys(user.db).length > 0
               ? user.vk.first_name + " " + user.vk.last_name
               : "Загрузка..."
           }

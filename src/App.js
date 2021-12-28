@@ -100,7 +100,11 @@ const App = () => {
           });
       })
       .catch((e) => {
-        openView("error")
+        setActiveView("error")
+        dispatch({
+          type: "setNewDb",
+          payload: {},
+        });
         console.log(e);
       });
   };
