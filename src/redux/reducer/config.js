@@ -1,5 +1,5 @@
 const init = {
-  xhr_url: "https://e51b9a87f49724.localhost.run/server/api.php",
+  xhr_url: "https://57dd-83-243-91-59.ngrok.io/server/api.php",
   appId: 8020410,
   globalData: {},
   loading: false,

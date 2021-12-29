@@ -16,8 +16,8 @@ import bridge from "@vkontakte/vk-bridge";
 import { useDispatch, useSelector } from "react-redux";
 
 const More = ({ id }) => {
-  const dispatch = useDispatch()
-  const ui = useSelector((s) => s.ui)
+  const dispatch = useDispatch();
+  const ui = useSelector((s) => s.ui);
   return (
     <Panel id={id}>
       <PanelHeader separator={false}>
@@ -35,15 +35,18 @@ const More = ({ id }) => {
             Наш канал с промокодами
           </SimpleCell>
         </Link>
-        <SimpleCell before={<Icon24Gift fill="rgb(156, 39, 176)" />} onClick={() => {
-          dispatch({
-            type:'updateModal',
-            payload:{
-              id:'more',
-              name:'promo'
-            }
-          })
-        }}>
+        <SimpleCell
+          before={<Icon24Gift fill="rgb(156, 39, 176)" />}
+          onClick={() => {
+            dispatch({
+              type: "updateModal",
+              payload: {
+                id: "more",
+                name: "promo",
+              },
+            });
+          }}
+        >
           Активировать промо
         </SimpleCell>
         <Link
