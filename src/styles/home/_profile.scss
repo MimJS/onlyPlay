@@ -190,10 +190,10 @@ body[scheme="space_gray"]{
         @extend %background-center-cover;
     }
     .online {
-        margin-top: 10px;
+        margin-top: 20px;
         display: flex;
         justify-content: center;
-        
+        margin-bottom: 10px;
         .in {
             width: fit-content;
             align-items: center;
