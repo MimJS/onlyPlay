@@ -10,9 +10,6 @@ export const configReducer = (state = init, action) => {
       return { ...state, globalData: action.payload };
     case "setLoading":
       return { ...state, loading: action.payload };
-    case "setTheme":
-      let scheme = action.payload != null ? action.payload : "inherit";
-      return { ...state, theme: scheme };
     default:
       return state;
   }
