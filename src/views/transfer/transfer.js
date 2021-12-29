@@ -109,21 +109,17 @@ const Transfer = ({ id, close, openView }) => {
             getFriendsData(r.data.response.friends);
           })
           .catch((e) => {
-            if (e.response) {
-              if (e.response.status == 400) {
-                dispatch({
-                  type: "setErrorData",
-                  payload: e.response.data.response
-                    ? e.response.data.response
-                    : {},
-                });
-                openView("error");
-                dispatch({
-                  type: "setNewDb",
-                  payload: {},
-                });
-              }
-            }
+            dispatch({
+              type: "setErrorData",
+              payload: e.response.data.response
+                ? e.response.data.response
+                : {},
+            });
+            openView("error");
+            dispatch({
+              type: "setNewDb",
+              payload: {},
+            });
           });
       } else {
         setFinishRequest(true);
@@ -188,6 +184,8 @@ const Transfer = ({ id, close, openView }) => {
                         {number_format(v.coins)} <Vkc />
                       </span>
                     }
+                    hasHover={false}
+                    hasActive={false}
                   >
                     {v.first_name && v.last_name
                       ? `${v.first_name} ${v.last_name}`

@@ -1,7 +1,11 @@
 #transfer {
+    .Search {
+        width: calc(100% - 32px);
+    }
     .panel--in {
         padding-top: 62px !important;
         .userBlock {
+            padding:0px !important;
             .verticalText {
                 svg {
                     margin-left: 3px;

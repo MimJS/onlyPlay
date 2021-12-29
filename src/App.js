@@ -100,19 +100,15 @@ const App = () => {
         });
       })
       .catch((e) => {
-        if (e.response) {
-          if (e.response.status == 400) {
-            dispatch({
-              type: "setErrorData",
-              payload: e.response.data.response ? e.response.data.response : {},
-            });
-            setActiveView("error");
-            dispatch({
-              type: "setNewDb",
-              payload: {},
-            });
-          }
-        }
+        dispatch({
+          type: "setErrorData",
+          payload: e.response.data.response ? e.response.data.response : {},
+        });
+        setActiveView("error");
+        dispatch({
+          type: "setNewDb",
+          payload: {},
+        });
       });
   };
 
