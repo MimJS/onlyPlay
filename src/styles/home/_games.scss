@@ -82,6 +82,11 @@ body[scheme="space_gray"] {
                 text-transform: uppercase;
             }
         }
+        .game--blackjack {
+            .bg {
+                background: url('../../img/blackjack.jpg');
+            }
+        }
         .game--doubleDice {
             .bg {
                 background: url("../../img/doubleDice.jpg");
