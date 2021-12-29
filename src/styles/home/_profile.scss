@@ -17,6 +17,11 @@ body[scheme="space_gray"]{
 }
 
 #profile {
+    .PanelHeader {
+        .SimpleCell__children {
+            font-weight: 500 !important;
+        }
+    }
     .block--balance {
         height: 128px;
         background: url("../../img/balance.png");

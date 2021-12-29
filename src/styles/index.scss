@@ -82,3 +82,9 @@ html,
     display: flex;
     align-items: center;
 }
+
+.PanelHeader {
+    .vkuiHeadline {
+        font-weight: 500 !important;
+    }
+}
