@@ -1,5 +1,5 @@
 const init = {
-  xhr_url: "https://4f28c6478822d6.localhost.run/server/api.php",
+  xhr_url: "https://38cbd850da5d52.localhost.run/server/api.php",
   globalData: {},
   loading: false
 };
