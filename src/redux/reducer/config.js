@@ -1,7 +1,7 @@
 const init = {
   xhr_url: "https://38cbd850da5d52.localhost.run/server/api.php",
   globalData: {},
-  loading: false
+  loading: false,
 };
 
 export const configReducer = (state = init, action) => {
