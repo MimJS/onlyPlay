@@ -71,6 +71,8 @@ export const ErrorPanelWs = ({ close, reopenGame, ...props }) => {
         {Object.keys(error.errorData).length === 0
           ? "Вы были отключены от сервера"
           : error.errorData.error_public}
+
+          {JSON.stringify(error.errorData)}
       </Placeholder>
     </Panel>
   );

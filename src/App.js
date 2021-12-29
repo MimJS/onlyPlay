@@ -84,10 +84,6 @@ const App = () => {
       },
     });
     dispatch({
-      type: "setErrorData",
-      payload: e.response ? e.response : {},
-    });
-    dispatch({
       type: "setLastGame",
       payload: gameName,
     });

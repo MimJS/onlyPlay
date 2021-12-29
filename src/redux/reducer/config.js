@@ -7,6 +7,7 @@ const init = {
   errorData: {},
   lastGame: null,
   errorType: null,
+  gameToken: null,
 };
 
 export const configReducer = (state = init, action) => {
@@ -21,6 +22,8 @@ export const configReducer = (state = init, action) => {
       return { ...state, lastGame: action.payload };
     case "setErrorType":
       return { ...state, errorType: action.payload };
+    case "setGameToken":
+      return { ...state, gameToken: action.payload };
     default:
       return state;
   }

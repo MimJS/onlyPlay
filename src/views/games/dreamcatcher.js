@@ -12,44 +12,62 @@ const Dreamcatcher = ({ id, close, getToken, openErrorWs }) => {
   const config = useSelector((s) => s.config);
   const user = useSelector((s) => s.user);
   const [gameData, setGameData] = useState({});
-  const dispatch = useDispatch()
-  let socket = null;
+  const dispatch = useDispatch();
+  const [token, setToken] = useState(null);
+  const socket = io(config.ws_url, {
+    path: "/server/websocket",
+    autoConnect: false,
+    transports: ["polling", "websocket"],
+    reconnection: false,
+    query: {
+      access_token: token,
+    },
+  });
+  const [startConnection, setStartConnection] = useState(false);
 
   const initGame = async () => {
-    const token = await getToken("dreamcatcher");
-    socket = io(config.ws_url, {
-      path: "/server/websocket",
-      autoConnect: false,
-      transports: ["polling", "websocket"],
-      reconnection:false,
-      query: {
-        access_token: token,
-      },
-    });
-    socket.connect();
-    socket_event(socket);
+    const access = await getToken("dreamcatcher");
+    setToken(access);
   };
 
   const socket_event = (ws) => {
     ws.on("connect", () => {
       console.log("nice");
+      dispatch({
+        type: "updatePopout",
+        payload: {
+          id: "game",
+          name: null,
+        },
+      });
     });
-    ws.on('disconnect', (c) => {
-        openErrorWs(c, 'dreamcatcher')
-    })
+    ws.on("disconnect", (c) => {
+      openErrorWs(c, "dreamcatcher");
+    });
     ws.on("request", async (c) => {
       console.log(c);
-      if(c.status === false){
-          openErrorWs(c, 'dreamcatcher')
+      if (c.status === false) {
+        dispatch({
+          type: "setErrorData",
+          payload: c.response ? c.response : {},
+        });
+        socket.close();
       }
     });
   };
 
   useEffect(() => {
-    if (Object.keys(gameData).length == 0) {
+    if (token !== null) {
+      if (!startConnection) {
+        setStartConnection(true);
+        socket.connect();
+        socket_event(socket);
+      }
+    }
+    if (token === null) {
       initGame();
     }
-  }, [gameData]);
+  }, [token, startConnection]);
 
   return (
     <Panel id={id}>
@@ -59,9 +77,7 @@ const Dreamcatcher = ({ id, close, getToken, openErrorWs }) => {
             <PanelHeaderBack
               hasHover={false}
               onClick={() => {
-                if (socket !== null) {
-                  socket.close();
-                }
+                socket.close();
                 close();
               }}
             />
