@@ -3,10 +3,10 @@ const number_format = (number, decimals, dec_point, thousands_sep) => {
   if (isNaN((decimals = Math.abs(decimals)))) {
     decimals = 0;
   }
-  if (dec_point == undefined) {
+  if (dec_point === undefined) {
     dec_point = ".";
   }
-  if (thousands_sep == undefined) {
+  if (thousands_sep === undefined) {
     thousands_sep = " ";
   }
   i = parseInt((number = (+number || 0).toFixed(decimals))) + "";

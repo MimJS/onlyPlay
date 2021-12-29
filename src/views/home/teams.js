@@ -20,7 +20,7 @@ import { useState } from "react";
 const Teams = ({ id, updateRating, openView }) => {
   const [type, setType] = useState("top");
   const changeType = (n) => {
-    if (n != type) {
+    if (n !== type) {
       setType(n);
     }
   };
@@ -128,10 +128,9 @@ const Teams = ({ id, updateRating, openView }) => {
                             </td>
                             <td style={{ position: "relative" }}>
                               <Avatar
-                                className="ratingAvatar"
+                                className="ratingAvatar myTeam"
                                 size={48}
                                 src={""}
-                                className="myTeam"
                               />
                             </td>
                           </tr>

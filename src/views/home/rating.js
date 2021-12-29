@@ -9,11 +9,10 @@ import {
   ScreenSpinner,
   List,
   PullToRefresh,
-  Link
+  Link,
 } from "@vkontakte/vkui";
 import {
   Icon28PollSquareOutline,
-  Icon24Chevron,
   Icon16Globe,
   Icon16ClockOurline,
   Icon16Stars,
@@ -27,12 +26,11 @@ const Rating = ({ id, updateRating }) => {
   const [type, setType] = useState(`day`);
   const [vkData, setVkData] = useState([]);
   const rating = useSelector((s) => s.user.rating);
-  const config = useSelector((s) => s.config);
   const token = useSelector((s) => s.user.token);
   const dispatch = useDispatch();
   const changeType = useCallback(
     (t) => {
-      if (t != type) {
+      if (t !== type) {
         setType(t);
         setVkData([]);
         // set screenspinner
@@ -43,9 +41,9 @@ const Rating = ({ id, updateRating }) => {
 
   const getId = async () => {
     let temp = "";
-    if (type == "day") {
+    if (type === "day") {
       if (rating.dayTop.length > 0) {
-        rating.dayTop.map((v) => {
+        rating.dayTop.forEach((v) => {
           temp += `${v.id},`;
         });
         return temp;
@@ -53,9 +51,9 @@ const Rating = ({ id, updateRating }) => {
         return temp;
       }
     }
-    if (type == "week") {
+    if (type === "week") {
       if (rating.weekTop.length > 0) {
-        rating.weekTop.map((v) => {
+        rating.weekTop.forEach((v) => {
           temp += `${v.id},`;
         });
         return temp;
@@ -65,50 +63,14 @@ const Rating = ({ id, updateRating }) => {
     }
   };
 
-  useEffect(async () => {
-    console.log(vkData.length);
-    if (vkData.length == 0 && Object.keys(rating).length > 0) {
-      const ids = await getId();
-      console.log(ids);
-      if (ids != null && ids != "") {
-        if (token != null) {
-          // method users.get
-          const userData = await bridge.send("VKWebAppCallAPIMethod", {
-            method: "users.get",
-            request_id: "onlyPlay",
-            params: {
-              user_ids: ids,
-              v: "5.131",
-              fields: "photo_100",
-              access_token: token,
-            },
-          });
-          setVkData(userData.response);
-        } else {
-          dispatch({
-            type: "updatePopout",
-            payload: {
-              id: "rating",
-              name: <ScreenSpinner size="medium" />,
-            },
-          });
-          const token = await bridge.send("VKWebAppGetAuthToken", {
-            app_id: 8020410,
-            scope: "",
-          });
-          dispatch({
-            type: "updatePopout",
-            payload: {
-              id: "rating",
-              name: null,
-            },
-          });
-          if (token.access_token) {
-            // safe temp token
-            dispatch({
-              type: "setUserToken",
-              payload: token.access_token,
-            });
+  useEffect(() => {
+    async function init() {
+      console.log(vkData.length);
+      if (vkData.length === 0 && Object.keys(rating).length > 0) {
+        const ids = await getId();
+        console.log(ids);
+        if (ids !== null && ids !== "") {
+          if (token != null) {
             // method users.get
             const userData = await bridge.send("VKWebAppCallAPIMethod", {
               method: "users.get",
@@ -117,15 +79,54 @@ const Rating = ({ id, updateRating }) => {
                 user_ids: ids,
                 v: "5.131",
                 fields: "photo_100",
-                access_token: token.access_token,
+                access_token: token,
               },
             });
             setVkData(userData.response);
+          } else {
+            dispatch({
+              type: "updatePopout",
+              payload: {
+                id: "rating",
+                name: <ScreenSpinner size="medium" />,
+              },
+            });
+            const token = await bridge.send("VKWebAppGetAuthToken", {
+              app_id: 8020410,
+              scope: "",
+            });
+            dispatch({
+              type: "updatePopout",
+              payload: {
+                id: "rating",
+                name: null,
+              },
+            });
+            if (token.access_token) {
+              // safe temp token
+              dispatch({
+                type: "setUserToken",
+                payload: token.access_token,
+              });
+              // method users.get
+              const userData = await bridge.send("VKWebAppCallAPIMethod", {
+                method: "users.get",
+                request_id: "onlyPlay",
+                params: {
+                  user_ids: ids,
+                  v: "5.131",
+                  fields: "photo_100",
+                  access_token: token.access_token,
+                },
+              });
+              setVkData(userData.response);
+            }
           }
         }
       }
     }
-  }, [vkData, rating]);
+    init();
+  });
 
   return (
     <Panel id={id}>
@@ -158,7 +159,7 @@ const Rating = ({ id, updateRating }) => {
         </TabsItem>
       </Tabs>
       <div className="panel--in" style={{ paddingBottom: 0 }}>
-        {type == "hour" && Object.keys(rating).length > 0 && (
+        {type === "hour" && Object.keys(rating).length > 0 && (
           <div className="paddingWrapper">
             <div className="ratingBanner">
               <div className="title">
@@ -195,7 +196,7 @@ const Rating = ({ id, updateRating }) => {
             </div>
           </div>
         )}
-        {type == "day" && Object.keys(rating).length > 0 && (
+        {type === "day" && Object.keys(rating).length > 0 && (
           <div className="paddingWrapper">
             <div className="ratingBanner">
               <div className="title">
@@ -232,7 +233,7 @@ const Rating = ({ id, updateRating }) => {
             </div>
           </div>
         )}
-        {type == "week" && Object.keys(rating).length > 0 && (
+        {type === "week" && Object.keys(rating).length > 0 && (
           <div className="paddingWrapper">
             <div className="ratingBanner">
               <div className="title">
@@ -273,111 +274,115 @@ const Rating = ({ id, updateRating }) => {
       <PullToRefresh onRefresh={() => updateRating(type)} isFetching={false}>
         <div className="panel--in" style={{ paddingTop: 0 }}>
           <List>
-            {type == "hour" && (
+            {type === "hour" && (
               <div className="rating_disabled">
                 <span className="in">
                   Топ дня будет запущен за час до следующей выдачи
                 </span>
               </div>
             )}
-            {type == "week" &&
+            {type === "week" &&
               Object.keys(rating).length > 0 &&
               rating.weekTop.map((v, i) => {
                 return (
-                  <Link href={'https://vk.com/id' + v.id} target='_blank'><SimpleCell
-                    key={i}
-                    before={
-                      <>
-                        <table className="table">
-                          <tr>
-                            <td>
-                              <div class="ratingPosition">{i + 1}</div>
-                            </td>
-                            <td style={{ position: "relative" }}>
-                              <Avatar
-                                className="ratingAvatar"
-                                size={48}
-                                src={
-                                  vkData.length == 0
-                                    ? ""
-                                    : vkData[i]
-                                    ? vkData[i].photo_100
-                                    : ""
-                                }
-                              />
-                            </td>
-                          </tr>
-                        </table>
-                      </>
-                    }
-                    description={`${util.number_format(v.amount)} ${
-                      rating.currencyNames[2]
-                    }`}
-                    indicator={
-                      v.reward && (
-                        <div className="prize">
-                          <div className="header">ПОЛУЧИТ</div>
-                          <div className="sum">{v.reward}</div>
-                        </div>
-                      )
-                    }
-                  >
-                    {vkData.length == 0
-                      ? "@id" + v.id
-                      : vkData[i]
-                      ? vkData[i].first_name + " " + vkData[i].last_name
-                      : "@id" + v.id}
-                  </SimpleCell></Link>
+                  <Link href={"https://vk.com/id" + v.id} target="_blank">
+                    <SimpleCell
+                      key={i}
+                      before={
+                        <>
+                          <table className="table">
+                            <tr>
+                              <td>
+                                <div class="ratingPosition">{i + 1}</div>
+                              </td>
+                              <td style={{ position: "relative" }}>
+                                <Avatar
+                                  className="ratingAvatar"
+                                  size={48}
+                                  src={
+                                    vkData.length === 0
+                                      ? ""
+                                      : vkData[i]
+                                      ? vkData[i].photo_100
+                                      : ""
+                                  }
+                                />
+                              </td>
+                            </tr>
+                          </table>
+                        </>
+                      }
+                      description={`${util.number_format(v.amount)} ${
+                        rating.currencyNames[2]
+                      }`}
+                      indicator={
+                        v.reward && (
+                          <div className="prize">
+                            <div className="header">ПОЛУЧИТ</div>
+                            <div className="sum">{v.reward}</div>
+                          </div>
+                        )
+                      }
+                    >
+                      {vkData.length === 0
+                        ? "@id" + v.id
+                        : vkData[i]
+                        ? vkData[i].first_name + " " + vkData[i].last_name
+                        : "@id" + v.id}
+                    </SimpleCell>
+                  </Link>
                 );
               })}
-            {type == "day" &&
+            {type === "day" &&
               Object.keys(rating).length > 0 &&
               rating.dayTop.map((v, i) => {
                 return (
-                  <Link href={'https://vk.com/id' + v.id} target='_blank'><SimpleCell
-                    key={i}
-                    before={
-                      <>
-                        <table className="table">
-                          <tr>
-                            <td>
-                              <div class="ratingPosition">{i + 1}</div>
-                            </td>
-                            <td style={{ position: "relative" }}>
-                              <Avatar
-                                className="ratingAvatar"
-                                size={48}
-                                src={
-                                  vkData.length == 0
-                                    ? ""
-                                    : vkData[i]
-                                    ? vkData[i].photo_100
-                                    : ""
-                                }
-                              />
-                            </td>
-                          </tr>
-                        </table>
-                      </>
-                    }
-                    description={`${util.number_format(v.amount)} ${
-                      rating.currencyNames[1]
-                    }`}
-                    indicator={
-                      v.reward && (
-                        <div className="prize">
-                          <div className="header">ПОЛУЧИТ</div>
-                          <div className="sum">{v.reward}</div>
-                        </div>
-                      )
-                    }
-                  >
-                    {vkData.length == 0
-                      ? "@id" + v.id
-                      : vkData[i]
-                      ? vkData[i].first_name + " " + vkData[i].last_name
-                      : "@id" + v.id}
-                  </SimpleCell></Link>
+                  <Link href={"https://vk.com/id" + v.id} target="_blank">
+                    <SimpleCell
+                      key={i}
+                      before={
+                        <>
+                          <table className="table">
+                            <tr>
+                              <td>
+                                <div class="ratingPosition">{i + 1}</div>
+                              </td>
+                              <td style={{ position: "relative" }}>
+                                <Avatar
+                                  className="ratingAvatar"
+                                  size={48}
+                                  src={
+                                    vkData.length === 0
+                                      ? ""
+                                      : vkData[i]
+                                      ? vkData[i].photo_100
+                                      : ""
+                                  }
+                                />
+                              </td>
+                            </tr>
+                          </table>
+                        </>
+                      }
+                      description={`${util.number_format(v.amount)} ${
+                        rating.currencyNames[1]
+                      }`}
+                      indicator={
+                        v.reward && (
+                          <div className="prize">
+                            <div className="header">ПОЛУЧИТ</div>
+                            <div className="sum">{v.reward}</div>
+                          </div>
+                        )
+                      }
+                    >
+                      {vkData.length === 0
+                        ? "@id" + v.id
+                        : vkData[i]
+                        ? vkData[i].first_name + " " + vkData[i].last_name
+                        : "@id" + v.id}
+                    </SimpleCell>
+                  </Link>
                 );
               })}
           </List>

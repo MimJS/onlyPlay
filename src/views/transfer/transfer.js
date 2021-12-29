@@ -74,7 +74,7 @@ const Transfer = ({ id, close, openView }) => {
   };
 
   const get_friends = async () => {
-    if (friendsList.length == 0) {
+    if (friendsList.length === 0) {
       const token = await bridge
         .send("VKWebAppGetAuthToken", {
           app_id: config.appId,
@@ -111,7 +111,7 @@ const Transfer = ({ id, close, openView }) => {
           .catch((e) => {
             dispatch({
               type: "setErrorData",
-              payload: e.response.data.response
+              payload: (e.response && e.response.data)
                 ? e.response.data.response
                 : {},
             });
@@ -129,11 +129,11 @@ const Transfer = ({ id, close, openView }) => {
   };
 
   useEffect(() => {
-    if (friendsList.length == 0) {
+    if (friendsList.length === 0) {
       console.log(friendsList);
       get_friends();
     }
-  }, [friendsList]);
+  });
 
   return (
     <Panel id={id}>

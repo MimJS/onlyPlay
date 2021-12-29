@@ -63,7 +63,7 @@ const App = () => {
   };
 
   const openView = (name) => {
-    if (activeView != name) {
+    if (activeView !== name) {
       setActiveView(name);
     }
   };
@@ -102,7 +102,7 @@ const App = () => {
       .catch((e) => {
         dispatch({
           type: "setErrorData",
-          payload: e.response.data.response ? e.response.data.response : {},
+          payload: (e.response && e.response.data) ? e.response.data.response : {},
         });
         setActiveView("error");
         dispatch({
@@ -112,17 +112,20 @@ const App = () => {
       });
   };
 
-  useEffect(async () => {
-    if (Object.keys(user.vk).length == 0) {
-      load_photo(photos);
-      const vk = await bridge.send("VKWebAppGetUserInfo");
-      dispatch({
-        type: "setNewVk",
-        payload: vk,
-      });
-      updateUser(vk);
+  useEffect(() => {
+    async function getVk() {
+      if (Object.keys(user.vk).length === 0) {
+        load_photo(photos);
+        const vk = await bridge.send("VKWebAppGetUserInfo");
+        dispatch({
+          type: "setNewVk",
+          payload: vk,
+        });
+        updateUser(vk);
+      }
     }
-  }, []);
+    getVk()
+  });
 
   return (
     <ConfigProvider scheme="inherit" platform={isAndroid ? "android" : "ios"}>
@@ -133,7 +136,7 @@ const App = () => {
               id="home"
               activePanel={activePanel.home}
               popout={
-                Object.keys(user.db).length == 0 ? (
+                Object.keys(user.db).length === 0 ? (
                   <ScreenSpinner size="medium" />
                 ) : null
               }

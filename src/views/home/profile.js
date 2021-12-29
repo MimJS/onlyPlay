@@ -11,9 +11,8 @@ import { Icon28MoneySendOutline } from "@vkontakte/icons";
 import { Icon24Coins } from "@vkontakte/icons";
 import { useState } from "react";
 import { Icon28SendOutline } from "@vkontakte/icons";
-import online from "../../img/online.png";
+//import online from "../../img/online.png";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
 import util from "../../lib/util";
 
 const Profile = ({ id, updateUser, openView }) => {
@@ -93,13 +92,13 @@ const Profile = ({ id, updateUser, openView }) => {
               <div className="up_text">
                 <span>статистика за день</span>
               </div>
-              <div className="right_btn">
+              <div className="right_btn" onClick={() => setStatType({...statType})}>
                 <Icon24Coins width={18} height={18} />
               </div>
               <div className="block--in">
                 <span>выигрыши</span>
                 <span>
-                  {statType.day == "win"
+                  {statType.day === "win"
                     ? user.db.stat_day_win
                     : user.db.stat_day_win_sum}
                 </span>
@@ -107,7 +106,7 @@ const Profile = ({ id, updateUser, openView }) => {
               <div className="block--in">
                 <span>проигрыши</span>
                 <span>
-                  {statType.day == "win"
+                  {statType.day === "win"
                     ? user.db.stat_day_lose
                     : user.db.stat_day_lose_sum}
                 </span>
@@ -123,7 +122,7 @@ const Profile = ({ id, updateUser, openView }) => {
               <div className="block--in">
                 <span>выигрыши</span>
                 <span>
-                  {statType.all == "win"
+                  {statType.all === "win"
                     ? user.db.stat_win
                     : user.db.stat_win_sum}
                 </span>
@@ -131,7 +130,7 @@ const Profile = ({ id, updateUser, openView }) => {
               <div className="block--in">
                 <span>проигрыши</span>
                 <span>
-                  {statType.all == "win"
+                  {statType.all === "win"
                     ? user.db.stat_lose
                     : user.db.stat_lose_sum}
                 </span>

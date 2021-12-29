@@ -24,7 +24,7 @@ const ErrorPanel = ({ getUser, ...props }) => {
         icon={<Icon56ErrorOutline fill="#D8605F" />}
         header="Ошибка"
       >
-        {Object.keys(error).length == 0 ? 'Вы были отключены от сервера' : error.error_public}
+        {Object.keys(error).length === 0 ? 'Вы были отключены от сервера' : error.error_public}
       </Placeholder>
     </Panel>
   );

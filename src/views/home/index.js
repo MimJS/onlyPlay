@@ -4,7 +4,6 @@ import {
   Tabbar,
   TabbarItem,
   Epic,
-  ConfigProvider,
   ModalRoot,
   ModalPage,
   ModalPageHeader,
@@ -49,14 +48,14 @@ const MainHome = ({ id, updateUser, openGame, openView }) => {
   const dispatch = useDispatch();
 
   const setSub = (n) => {
-    if (n != ui.activeUnder) {
-      if (n == "profile") {
+    if (n !== ui.activeUnder) {
+      if (n === "profile") {
         updateUser();
       }
-      if (n == "rating" || n == "teams") {
+      if (n === "rating" || n === "teams") {
         getRating();
       }
-      if (n == "more") {
+      if (n === "more") {
         setPromoStatus({
           isError: false,
           errorText: "",
@@ -75,7 +74,7 @@ const MainHome = ({ id, updateUser, openGame, openView }) => {
   };
 
   const updateRating = (type) => {
-    if (type == "day") {
+    if (type === "day") {
       axios
         .post(config.xhr_url, {
           authorization: {
@@ -98,7 +97,7 @@ const MainHome = ({ id, updateUser, openGame, openView }) => {
           console.log(e);
         });
     }
-    if (type == "week") {
+    if (type === "week") {
       axios
         .post(config.xhr_url, {
           authorization: {
@@ -121,7 +120,7 @@ const MainHome = ({ id, updateUser, openGame, openView }) => {
           console.log(e);
         });
     }
-    if (type == "hour") {
+    if (type === "hour") {
       axios
         .post(config.xhr_url, {
           authorization: {
@@ -205,7 +204,7 @@ const MainHome = ({ id, updateUser, openGame, openView }) => {
       })
       .then((r) => {
         console.log(r.data.response);
-        if (r.data.response.isError == true) {
+        if (r.data.response.isError === true) {
           setPromoStatus(r.data.response);
         } else {
           setPromo("");
@@ -282,15 +281,15 @@ const MainHome = ({ id, updateUser, openGame, openView }) => {
       >
         <FormItem
           top="Введите промокод:"
-          status={promoStatus.isError == true && "error"}
-          bottom={promoStatus.isError == true && promoStatus.errorText}
+          status={promoStatus.isError === true && "error"}
+          bottom={promoStatus.isError === true && promoStatus.errorText}
         >
           <Input
             type="text"
             value={promo}
             onChange={(e) => {
               setPromo(e.currentTarget.value);
-              if (e.currentTarget.value.length == 0) {
+              if (e.currentTarget.value.length === 0) {
                 setPromoStatus({
                   isError: false,
                   errorText: "",
@@ -357,7 +356,7 @@ const MainHome = ({ id, updateUser, openGame, openView }) => {
         <FormItem style={{ paddingTop: 0 }}>
           <Button
             size="l"
-            disabled={coinInSum == 0}
+            disabled={coinInSum === 0}
             stretched
             before={<Icon24MoneyTransfer />}
             onClick={() => {
@@ -433,7 +432,7 @@ const MainHome = ({ id, updateUser, openGame, openView }) => {
         <FormItem style={{ paddingTop: 0 }}>
           <Button
             size="l"
-            disabled={coinOutSum == 0}
+            disabled={coinOutSum === 0}
             stretched
             before={<Icon24MoneyTransfer />}
             onClick={() => {}}
