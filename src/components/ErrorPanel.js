@@ -1,20 +1,30 @@
-import { Button, Panel, Placeholder } from "@vkontakte/vkui";
+import { CellButton, Panel, Placeholder } from "@vkontakte/vkui";
 import React from "react";
 import { Icon56ErrorOutline } from "@vkontakte/icons";
-const ErrorPanel = ({getUser, ...props }) => {
-    console.log("RENDERED IN DOCUMENT");
+import { useSelector } from "react-redux";
+const ErrorPanel = ({ getUser, ...props }) => {
+  const error = useSelector((s) => s.config.errorData)
   return (
     <Panel centered {...props}>
       <Placeholder
+      stretched
         action={
-          <Button onClick={() =>{getUser()}}size="l" mode="tertiary">
+          <CellButton
+            hasHover={false}
+            hasActive={false}
+            onClick={() => {
+              getUser();
+            }}
+            size="l"
+            mode="tertiary"
+          >
             Повторить попытку
-          </Button>
+          </CellButton>
         }
-        icon={<Icon56ErrorOutline fill="var(--field_error_border)" />}
+        icon={<Icon56ErrorOutline fill="#D8605F" />}
         header="Ошибка"
       >
-        Вы были отключены от сервера
+        {Object.keys(error).length == 0 ? 'Вы были отключены от сервера' : error.error_public}
       </Placeholder>
     </Panel>
   );

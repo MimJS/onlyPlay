@@ -94,18 +94,23 @@ const App = () => {
           type: "setGlobalData",
           payload: r.data.response.global,
         });
-          dispatch({
-            type: "setNewVk",
-            payload: r.data.response.vk,
-          });
+        dispatch({
+          type: "setNewVk",
+          payload: r.data.response.vk,
+        });
       })
       .catch((e) => {
-        setActiveView("error")
-        dispatch({
-          type: "setNewDb",
-          payload: {},
-        });
-        console.log(e);
+        if (e.response.status == 400) {
+          dispatch({
+            type: "setErrorData",
+            payload: e.response.data.response ? e.response.data.response : {},
+          });
+          setActiveView("error");
+          dispatch({
+            type: "setNewDb",
+            payload: {},
+          });
+        }
       });
   };
 
@@ -148,13 +153,17 @@ const App = () => {
             <View id="game" activePanel={activePanel.game}>
               <Tower id="tower" close={closeGame} />
             </View>
-            <View id="error" activePanel="errorPanel">
-              <ErrorPanel getUser={()=>{
-                updateUser();
-                openView("home")}} id="errorPanel"/>
-              </View>
             <View id="transfer" activePanel={activePanel.transfer}>
-              <Transfer id="transfer" close={closeGame} />
+              <Transfer id="transfer" close={closeGame} openView={openView} />
+            </View>
+            <View id="error" activePanel="errorPanel">
+              <ErrorPanel
+                getUser={() => {
+                  updateUser();
+                  openView("home");
+                }}
+                id="errorPanel"
+              />
             </View>
           </Root>
         </AppRoot>
