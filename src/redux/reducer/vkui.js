@@ -1,3 +1,5 @@
+import { ScreenSpinner } from "@vkontakte/vkui";
+
 const init = {
   activeModal: {
     profile: null,
@@ -5,6 +7,7 @@ const init = {
   },
   activePopout: {
     rating: null,
+    game: <ScreenSpinner size='medium'/>
   },
   activeSnackbar: {
     more: null,

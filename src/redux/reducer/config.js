@@ -1,9 +1,12 @@
 const init = {
-  xhr_url: "https://57dd-83-243-91-59.ngrok.io/server/api.php",
+  xhr_url: "https://aaacf166847d8f.localhost.run/server/api.php",
+  ws_url: "https://aaacf166847d8f.localhost.run",
   appId: 8020410,
   globalData: {},
   loading: false,
   errorData: {},
+  lastGame: null,
+  errorType: null,
 };
 
 export const configReducer = (state = init, action) => {
@@ -14,6 +17,10 @@ export const configReducer = (state = init, action) => {
       return { ...state, loading: action.payload };
     case "setErrorData":
       return { ...state, errorData: action.payload };
+    case "setLastGame":
+      return { ...state, lastGame: action.payload };
+    case "setErrorType":
+      return { ...state, errorType: action.payload };
     default:
       return state;
   }

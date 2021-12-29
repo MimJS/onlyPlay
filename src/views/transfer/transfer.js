@@ -19,7 +19,7 @@ import { Icon56ErrorOutline } from "@vkontakte/icons";
 import { number_format } from "../../lib/util";
 import { ReactComponent as Vkc } from "../../svg/vkc.svg";
 
-const Transfer = ({ id, close, openView }) => {
+const Transfer = ({ id, close, openErrorXhr }) => {
   const [isError, setIsError] = useState(false);
   const [finishRequest, setFinishRequest] = useState(false);
   const [friendsList, setFriendsList] = useState([]);
@@ -109,17 +109,7 @@ const Transfer = ({ id, close, openView }) => {
             getFriendsData(r.data.response.friends);
           })
           .catch((e) => {
-            dispatch({
-              type: "setErrorData",
-              payload: (e.response && e.response.data)
-                ? e.response.data.response
-                : {},
-            });
-            openView("error");
-            dispatch({
-              type: "setNewDb",
-              payload: {},
-            });
+            openErrorXhr(e)
           });
       } else {
         setFinishRequest(true);

@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Game = ({gameName, onlineCount, className}) => {
+const Game = ({gameName, onlineCount, className, onClick}) => {
     return (
-         <div className={`block--game ${className}`}>
+         <div className={`block--game ${className}`} onClick={onClick}>
           <div className="bg">
             <div className="online">
                 {onlineCount}
