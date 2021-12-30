@@ -17,9 +17,9 @@ import { number_format } from "../../lib/util";
 import { ReactComponent as Vkc } from "../../svg/vkc.svg";
 import { Icon56DiamondOutline } from "@vkontakte/icons";
 import { Icon24DoneOutline } from "@vkontakte/icons";
-import thimbleGray from '../../img/thimble-grey.png'
-import thimbleRed from '../../img/thimble-red.png'
-import thimbleCoins from '../../img/thimble-coins.png'
+import thimbleGray from "../../img/thimble-grey.png";
+import thimbleRed from "../../img/thimble-red.png";
+import thimbleCoins from "../../img/thimble-coins.png";
 
 const Thimble = ({ id, close, getToken, openErrorWs }) => {
   const config = useSelector((s) => s.config);
@@ -32,7 +32,8 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
   const dispatch = useDispatch();
   const [token, setToken] = useState(null);
   const [sum, setSum] = useState(null);
-  const [vkData, setVkData] = useState([])
+  const [vkData, setVkData] = useState([]);
+  const [sortFinish, setSortFinish] = useState(false);
   const socket = io(config.ws_url, {
     path: "/server/websocket",
     autoConnect: false,
@@ -87,16 +88,20 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
             }
             setBetError(null);
             setInGame(true);
-            setGameData({
-              ...gameData,
+            setGameData(prevState => ({
+              ...prevState,
               myGame: { ...gameData.myGame, hash: c.response.hash },
-            });
+            }));
             dispatch({
               type: "updateBalance",
               payload: c.response.private.coins,
             });
-           
-            
+            break;
+          case "updateGame":
+            setGameData(prevState => ({
+              ...prevState,
+              history: c.response.history,
+            }));
             break;
           case "gameResult":
             setIsResult(true);
@@ -193,18 +198,8 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
               {inGame && (
                 <div className={`thimbles ${isResult ? "results" : ""}`}>
                   <div className="thimble" onClick={() => chooseThimble(1)}>
-                    <img
-                      className="tgImage"
-                      src={
-                        thimbleGray
-                      }
-                    />
-                    <img
-                      className="tImage"
-                      src={
-                        thimbleRed
-                      }
-                    />
+                    <img className="tgImage" src={thimbleGray} />
+                    <img className="tImage" src={thimbleRed} />
                     <img
                       className={`coins ${
                         Object.keys(gameResult).length > 0 &&
@@ -212,24 +207,12 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
                           ? "showCoins"
                           : ""
                       }`}
-                      src={
-                        thimbleCoins
-                      }
+                      src={thimbleCoins}
                     />
                   </div>
                   <div className="thimble" onClick={() => chooseThimble(2)}>
-                    <img
-                      className="tgImage"
-                      src={
-                        thimbleGray
-                      }
-                    />
-                    <img
-                      className="tImage"
-                      src={
-                        thimbleRed
-                      }
-                    />
+                    <img className="tgImage" src={thimbleGray} />
+                    <img className="tImage" src={thimbleRed} />
                     <img
                       className={`coins ${
                         Object.keys(gameResult).length > 0 &&
@@ -237,24 +220,12 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
                           ? "showCoins"
                           : ""
                       }`}
-                      src={
-                        thimbleCoins
-                      }
+                      src={thimbleCoins}
                     />
                   </div>
                   <div className="thimble" onClick={() => chooseThimble(3)}>
-                    <img
-                      className="tgImage"
-                      src={
-                        thimbleGray
-                      }
-                    />
-                    <img
-                      className="tImage"
-                      src={
-                        thimbleRed
-                      }
-                    />
+                    <img className="tgImage" src={thimbleGray} />
+                    <img className="tImage" src={thimbleRed} />
                     <img
                       className={`coins ${
                         Object.keys(gameResult).length > 0 &&
@@ -262,9 +233,7 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
                           ? "showCoins"
                           : ""
                       }`}
-                      src={
-                        thimbleCoins
-                      }
+                      src={thimbleCoins}
                     />
                   </div>
                 </div>
@@ -371,33 +340,29 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
             </div>
             {!inGame && (
               <div className="historyList">
-                <SimpleCell
-                  before={<Avatar src={""} size={40} />}
-                  hasHover={false}
-                  hasActive={false}
-                  description={
-                    <span className="sum plus verticalText">
-                      + {number_format(285000)}
-                      <Vkc />
-                    </span>
-                  }
-                  indicator={<span className="koef">x2.7</span>}
-                >
-                  Михаил Матеевский
-                </SimpleCell>
-                <SimpleCell
-                  before={<Avatar src={""} size={40} />}
-                  hasHover={false}
-                  hasActive={false}
-                  description={
-                    <span className="sum minus verticalText">
-                      - {number_format(1852369000)}
-                      <Vkc />
-                    </span>
-                  }
-                >
-                  Михаил Матеевский
-                </SimpleCell>
+                {gameData.history &&
+                  gameData.history.map((v, i) => (
+                    <SimpleCell
+                      key={i}
+                      before={<Avatar src={v.photo_100} size={40} />}
+                      hasHover={false}
+                      hasActive={false}
+                      description={
+                        <span
+                          className={`sum ${
+                            v.win ? "plus" : "minus"
+                          } verticalText`}
+                        >
+                          {v.win ? "+" : "-"}{" "}
+                          {number_format(v.win ? v.win : v.coins)}
+                          <Vkc />
+                        </span>
+                      }
+                      indicator={v.win && <span className="koef">x2.7</span>}
+                    >
+                      {v.first_name} {v.last_name}
+                    </SimpleCell>
+                  ))}
               </div>
             )}
           </>
