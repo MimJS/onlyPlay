@@ -1,6 +1,6 @@
 const init = {
-  xhr_url: "https://vkonlyplay.ru/server/api.php",
-  ws_url: "https://vkonlyplay.ru/",
+  xhr_url: "http://localhost:8080/server/api.php",
+  ws_url: "http://localhost:8080/",
   appId: 8020410,
   globalData: {},
   loading: false,
