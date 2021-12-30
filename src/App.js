@@ -12,7 +12,7 @@ import React, { useState, useEffect } from "react";
 
 import MainHome from "./views/home";
 import CreateTeam from "./views/createTeam/createTeam";
-import Dreamcatcher from "./views/games/dreamcatcher";
+import Thimble from "./views/games/thimble";
 import Transfer from "./views/transfer/transfer";
 
 import bridge from "@vkontakte/vk-bridge";
@@ -254,8 +254,8 @@ const App = () => {
               activePanel={activePanel.game}
               popout={ui.activePopout.game}
             >
-              <Dreamcatcher
-                id="dreamcatcher"
+              <Thimble
+                id="thimble"
                 close={closeGame}
                 openErrorWs={openErrorWs}
                 getToken={getToken}

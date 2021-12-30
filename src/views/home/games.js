@@ -12,10 +12,15 @@ const Games = ({ id, openGame }) => {
       </PanelHeader>
       <div className="panel--in game--list">
         <Game
+          gameName="Thimble"
+          onlineCount={552}
+          className="game--thimble"
+          onClick={() => openGame("thimble")}
+        />
+        <Game
           gameName="Dream Catcher"
           onlineCount={829}
           className="game--dreamCatcher"
-          onClick={() => openGame('dreamcatcher')}
         />
         <Game
           gameName="Double dice"
@@ -36,7 +41,6 @@ const Games = ({ id, openGame }) => {
           onlineCount={234}
           className="game--dicewheel"
         />
-        <Game gameName="Thimble" onlineCount={0} className="game--thimble" />
       </div>
     </Panel>
   );
