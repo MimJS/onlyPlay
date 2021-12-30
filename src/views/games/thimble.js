@@ -88,7 +88,7 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
             }
             setBetError(null);
             setInGame(true);
-            setGameData(prevState => ({
+            setGameData((prevState) => ({
               ...prevState,
               myGame: { ...gameData.myGame, hash: c.response.hash },
             }));
@@ -98,7 +98,7 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
             });
             break;
           case "updateGame":
-            setGameData(prevState => ({
+            setGameData((prevState) => ({
               ...prevState,
               history: c.response.history,
             }));
@@ -197,45 +197,21 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
               )}
               {inGame && (
                 <div className={`thimbles ${isResult ? "results" : ""}`}>
-                  <div className="thimble" onClick={() => chooseThimble(1)}>
-                    <img className="tgImage" src={thimbleGray} />
-                    <img className="tImage" src={thimbleRed} />
-                    <img
-                      className={`coins ${
-                        Object.keys(gameResult).length > 0 &&
-                        gameResult.result == 1
-                          ? "showCoins"
-                          : ""
-                      }`}
-                      src={thimbleCoins}
-                    />
-                  </div>
-                  <div className="thimble" onClick={() => chooseThimble(2)}>
-                    <img className="tgImage" src={thimbleGray} />
-                    <img className="tImage" src={thimbleRed} />
-                    <img
-                      className={`coins ${
-                        Object.keys(gameResult).length > 0 &&
-                        gameResult.result == 2
-                          ? "showCoins"
-                          : ""
-                      }`}
-                      src={thimbleCoins}
-                    />
-                  </div>
-                  <div className="thimble" onClick={() => chooseThimble(3)}>
-                    <img className="tgImage" src={thimbleGray} />
-                    <img className="tImage" src={thimbleRed} />
-                    <img
-                      className={`coins ${
-                        Object.keys(gameResult).length > 0 &&
-                        gameResult.result == 3
-                          ? "showCoins"
-                          : ""
-                      }`}
-                      src={thimbleCoins}
-                    />
-                  </div>
+                  {[...Array(3)].map((v, i) => (
+                    <div className="thimble" onClick={() => chooseThimble(i+1)}>
+                      <img className="tgImage" src={thimbleGray} />
+                      <img className="tImage" src={thimbleRed} />
+                      <img
+                        className={`coins ${
+                          Object.keys(gameResult).length > 0 &&
+                          gameResult.result == i+1
+                            ? "showCoins"
+                            : ""
+                        }`}
+                        src={thimbleCoins}
+                      />
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
