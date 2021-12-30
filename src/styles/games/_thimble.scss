@@ -1,3 +1,144 @@
 #thimble {
-    
+    .gameTable {
+        margin-top: 10px;
+        background: var(--table_block_background);
+        border-radius: var(--br);
+        padding: 40px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .wait {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            .Icon {
+                animation: switchColor 2s linear infinite;
+                svg {
+                }
+            }
+            .text {
+                font-size: 27px;
+                font-weight: 300;
+            }
+        }
+    }
+    .betTable {
+        margin-top: 10px;
+        .buttonsRow {
+            display: flex;
+            align-items: center;
+            .Button {
+                width: calc(25% - 6px);
+                margin: 0 3px;
+                border-radius: var(--br);
+                color: white;
+                &:last-child {
+                    width: calc(25% - 3px);
+                    margin-right: 0;
+                    background: #e91e63;
+                }
+                &:first-child {
+                    width: calc(25% - 3px);
+                    margin-left: 0;
+                    background: #ffc107;
+                }
+                &:nth-child(2) {
+                    background: #8bc34a;
+                }
+                &:nth-child(3) {
+                    background: #03a9f4;
+                }
+            }
+        }
+        .inputLayout {
+            margin-top: 10px;
+            position: relative;
+            .Input {
+                border-radius: var(--br);
+            }
+            .betButtons {
+                position: absolute;
+                top: 4px;
+                right: 5px;
+                z-index: 2;
+                .Button {
+                    border-radius: var(--br);
+                    &:last-child {
+                        margin-left: 5px;
+                    }
+                }
+            }
+        }
+        .bet {
+            margin-top: 10px;
+            border-radius: var(--br);
+        }
+    }
+    .hashData {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 24px 0;
+        span {
+            font-size: 13px;
+            color: var(--text_secondary);
+            line-height: 16px;
+            font-weight: 400;
+            text-align: center;
+        }
+    }
+    .historyList {
+        .SimpleCell {
+            padding: 0px !important;
+            .sum {
+                font-size: 13px;
+                line-height: 16px;
+                svg {
+                    width: 12px;
+                    height: 12px;
+                    margin-left: 3px;
+                }
+                &.plus {
+                    color: rgb(86, 190, 126);
+                }
+                &.minus {
+                    color: rgb(238, 94, 85);
+                }
+            }
+            .koef {
+                color: #ffc400;
+                font-size: 22px;
+                font-weight: 200;
+                line-height: 22px;
+            }
+        }
+    }
+}
+
+@keyframes switchColor {
+    0% {
+        color: #ef5350;
+    }
+    24.9999% {
+        color: #ef5350;
+    }
+    25% {
+        color: #42a5f5;
+    }
+    49.9999% {
+        color: #42a5f5;
+    }
+    50% {
+        color: #ffca28;
+    }
+    74.9999% {
+        color: #ffca28;
+    }
+    75% {
+        color: #66bb6a;
+    }
+    100% {
+        color: #66bb6a;
+    }
 }

@@ -1,1 +1,24 @@
-@import './thimble.scss'
+@import "./thimble.scss";
+
+#game {
+    .balance {
+        width: calc(100% - 20px);
+        background-color: var(--balance_block_background);
+        border-radius: var(--br);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        .balance--in {
+            font-weight: 300;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            svg {
+                width: 18px;
+                height: 18px;
+                margin-left: 3px;
+            }
+        }
+    }
+}
