@@ -35,7 +35,7 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
   const [vkData, setVkData] = useState([]);
   const [sortFinish, setSortFinish] = useState(false);
   const socket = io(config.ws_url, {
-    path: "/server/websocket",
+    path: "/server/websocket.php",
     autoConnect: false,
     transports: ["websocket"],
     reconnection: false,
@@ -122,7 +122,7 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
     if (!startConnection) {
       async function initWs() {
         window.socket = io(config.ws_url, {
-          path: "/server/websocket",
+          path: "/server/websocket.php",
           autoConnect: false,
           transports: ["websocket"],
           reconnection: false,
