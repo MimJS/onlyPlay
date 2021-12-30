@@ -95,7 +95,8 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
               type: "updateBalance",
               payload: c.response.private.coins,
             });
-            sortUsers()
+           
+            
             break;
           case "gameResult":
             setIsResult(true);

@@ -20,6 +20,8 @@ export const userReducer = (state = init, action) => {
       let rat = { ...state.rating };
       rat[action.payload.type] = action.payload.data;
       return { ...state, rating: rat };
+    case "updateBalance":
+      return { ...state, db: { ...state.db, coins: action.payload } };
     default:
       return state;
   }

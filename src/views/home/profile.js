@@ -145,7 +145,7 @@ const Profile = ({ id, updateUser, openView }) => {
         </PullToRefresh>
       )}
       <div className="preloader">
-        {[...Array(15)].map((v, i) => (
+        {[...Array(25)].map((v, i) => (
           <div className={"item" + i}></div>
         ))}
       </div>

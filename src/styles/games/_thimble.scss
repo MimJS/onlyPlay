@@ -22,6 +22,93 @@
                 font-weight: 300;
             }
         }
+        .thimbles {
+            width: 100%;
+            &.results {
+                .thimble {
+                    .tgImage {
+                        opacity: 0.1;
+                    }
+                    .tImage {
+                        transform: translateY(-20px);
+                        opacity: 0;
+                    }
+                    .showCoins {
+                        opacity: 1 !important;
+                    }
+                }
+            }
+            .thimble {
+                display: inline-block;
+                width: calc(33.33333% - 10px);
+                max-width: 200px;
+                position: relative;
+                margin-left: 5px;
+                margin-right: 5px;
+                .tgImage {
+                    width: 100%;
+                    z-index: 0;
+                    opacity: 0;
+                    transition: all 0.1s linear;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+                .tImage {
+                    width: 100%;
+                    position: relative;
+                    z-index: 2;
+                    opacity: 1;
+                    transition: all 0.5s linear;
+                }
+                .coins {
+                    width: 50%;
+                    position: absolute;
+                    bottom: 3px;
+                    left: 0;
+                    right: 0;
+                    margin: 0 auto;
+                    z-index: 1;
+                    opacity: 0;
+                    transition: all 0.1s linear;
+                }
+            }
+        }
+    }
+    .FormStatus--positive {
+        background: #009688;
+        color: #fff;
+        h3 {
+            color: #fff !important;
+        }
+    }
+    .FormStatus {
+        position: relative;
+        margin-top: 10px;
+        h3 {
+            font-weight: 500 !important;
+        }
+        .vkuiCaption {
+            padding-right: 50px;
+            .koef {
+                position: absolute;
+                right: 10px;
+                top: calc(50% - 11px);
+                color: #ffc400;
+                font-size: 22px;
+                font-weight: 200;
+                line-height: 22px;
+                vertical-align: middle;
+            }
+            .verticalText {
+                svg {
+                    margin-left: 3px;
+                    width: 12px;
+                    height: 12px;
+                    margin-right: 3px;
+                }
+            }
+        }
     }
     .betTable {
         margin-top: 10px;
@@ -53,19 +140,22 @@
         }
         .inputLayout {
             margin-top: 10px;
-            position: relative;
-            .Input {
-                border-radius: var(--br);
-            }
-            .betButtons {
-                position: absolute;
-                top: 4px;
-                right: 5px;
-                z-index: 2;
-                .Button {
+            .vkuiFormItem {
+                padding:0 !important;
+                position: relative;
+                .Input {
                     border-radius: var(--br);
-                    &:last-child {
-                        margin-left: 5px;
+                }
+                .betButtons {
+                    position: absolute;
+                    top: 4px;
+                    right: 5px;
+                    z-index: 2;
+                    .Button {
+                        border-radius: var(--br);
+                        &:last-child {
+                            margin-left: 5px;
+                        }
                     }
                 }
             }
@@ -75,11 +165,15 @@
             border-radius: var(--br);
         }
     }
+    .continue {
+        margin-top: 10px;
+    }
     .hashData {
         display: flex;
         flex-direction: column;
         align-items: center;
         margin: 24px 0;
+        width: 100%;
         span {
             font-size: 13px;
             color: var(--text_secondary);
