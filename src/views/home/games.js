@@ -1,8 +1,10 @@
 import { Panel, PanelHeader, PanelHeaderContent } from "@vkontakte/vkui";
 import { Icon28GameOutline } from "@vkontakte/icons";
 import Game from "../../components/Game";
+import { useSelector } from "react-redux";
 
 const Games = ({ id, openGame }) => {
+  const online = useSelector((s) => s.config.globalData.gamesOnline)
   return (
     <Panel id={id}>
       <PanelHeader separator={false}>
