@@ -7,6 +7,8 @@ import {
   Input,
   SimpleCell,
   Avatar,
+  FormStatus,
+  FormItem,
 } from "@vkontakte/vkui";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
@@ -15,13 +17,22 @@ import { number_format } from "../../lib/util";
 import { ReactComponent as Vkc } from "../../svg/vkc.svg";
 import { Icon56DiamondOutline } from "@vkontakte/icons";
 import { Icon24DoneOutline } from "@vkontakte/icons";
+import thimbleGray from '../../img/thimble-grey.png'
+import thimbleRed from '../../img/thimble-red.png'
+import thimbleCoins from '../../img/thimble-coins.png'
 
 const Thimble = ({ id, close, getToken, openErrorWs }) => {
   const config = useSelector((s) => s.config);
   const user = useSelector((s) => s.user);
   const [gameData, setGameData] = useState({});
+  const [inGame, setInGame] = useState(false);
+  const [isResult, setIsResult] = useState(false);
+  const [gameResult, setGameResult] = useState({});
+  const [betError, setBetError] = useState(null);
   const dispatch = useDispatch();
   const [token, setToken] = useState(null);
+  const [sum, setSum] = useState(null);
+  const [vkData, setVkData] = useState([])
   const socket = io(config.ws_url, {
     path: "/server/websocket",
     autoConnect: false,
@@ -55,17 +66,44 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
     });
     ws.on("request", async (c) => {
       console.log(c);
-      if (c.status === false) {
-        dispatch({
-          type: "setErrorData",
-          payload: c.response ? c.response : {},
-        });
-        socket.disconnect(true);
-        openErrorWs(c, "thimble");
+      if (c.event == "getError") {
+        if (c.status === false) {
+          dispatch({
+            type: "setErrorData",
+            payload: c.response ? c.response : {},
+          });
+          socket.disconnect(true);
+          openErrorWs(c, "thimble");
+        }
       } else {
         switch (c.event) {
           case "initGame":
             setGameData(c.response);
+            break;
+          case "startGame":
+            if (c.status == false) {
+              setBetError(c.response.error_public);
+              return;
+            }
+            setBetError(null);
+            setInGame(true);
+            setGameData({
+              ...gameData,
+              myGame: { ...gameData.myGame, hash: c.response.hash },
+            });
+            dispatch({
+              type: "updateBalance",
+              payload: c.response.private.coins,
+            });
+            sortUsers()
+            break;
+          case "gameResult":
+            setIsResult(true);
+            setGameResult(c.response);
+            dispatch({
+              type: "updateBalance",
+              payload: c.response.private.coins,
+            });
             break;
           default:
             break;
@@ -96,6 +134,22 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
       initWs();
     }
   }, [startConnection]);
+
+  const chooseThimble = (id) => {
+    if (isResult == true || inGame == false) {
+      return;
+    }
+    window.socket.emit("request", {
+      event: "chooseThimble",
+      value: id,
+    });
+  };
+
+  const restGame = () => {
+    setInGame(false);
+    setIsResult(false);
+    setGameResult({});
+  };
 
   return (
     <Panel id={id}>
@@ -129,85 +183,222 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
         {Object.keys(gameData).length !== 0 && (
           <>
             <div className="gameTable">
-              <div className="wait">
-                <Icon56DiamondOutline />
-                <span className="text">Ваша ставка?</span>
-              </div>
+              {!inGame && (
+                <div className="wait">
+                  <Icon56DiamondOutline />
+                  <span className="text">Ваша ставка?</span>
+                </div>
+              )}
+              {inGame && (
+                <div className={`thimbles ${isResult ? "results" : ""}`}>
+                  <div className="thimble" onClick={() => chooseThimble(1)}>
+                    <img
+                      className="tgImage"
+                      src={
+                        thimbleGray
+                      }
+                    />
+                    <img
+                      className="tImage"
+                      src={
+                        thimbleRed
+                      }
+                    />
+                    <img
+                      className={`coins ${
+                        Object.keys(gameResult).length > 0 &&
+                        gameResult.result == 1
+                          ? "showCoins"
+                          : ""
+                      }`}
+                      src={
+                        thimbleCoins
+                      }
+                    />
+                  </div>
+                  <div className="thimble" onClick={() => chooseThimble(2)}>
+                    <img
+                      className="tgImage"
+                      src={
+                        thimbleGray
+                      }
+                    />
+                    <img
+                      className="tImage"
+                      src={
+                        thimbleRed
+                      }
+                    />
+                    <img
+                      className={`coins ${
+                        Object.keys(gameResult).length > 0 &&
+                        gameResult.result == 2
+                          ? "showCoins"
+                          : ""
+                      }`}
+                      src={
+                        thimbleCoins
+                      }
+                    />
+                  </div>
+                  <div className="thimble" onClick={() => chooseThimble(3)}>
+                    <img
+                      className="tgImage"
+                      src={
+                        thimbleGray
+                      }
+                    />
+                    <img
+                      className="tImage"
+                      src={
+                        thimbleRed
+                      }
+                    />
+                    <img
+                      className={`coins ${
+                        Object.keys(gameResult).length > 0 &&
+                        gameResult.result == 3
+                          ? "showCoins"
+                          : ""
+                      }`}
+                      src={
+                        thimbleCoins
+                      }
+                    />
+                  </div>
+                </div>
+              )}
             </div>
-            <div className="betTable">
-              <div className="buttonsRow">
-                <Button size="m" stretched>
-                  +1KK
-                </Button>
-                <Button size="m" stretched>
-                  +5KK
-                </Button>
-                <Button size="m" stretched>
-                  +10KK
-                </Button>
-                <Button size="m" stretched>
-                  +25KK
-                </Button>
-              </div>
-              <div className="inputLayout">
-                <Input placeholder="Ваша ставка" />
-                <div className="betButtons">
-                  <Button size="m" mode="secondary">
-                    /2
+            {!inGame && (
+              <div className="betTable">
+                <div className="buttonsRow">
+                  <Button size="m" stretched>
+                    +1KK
                   </Button>
-                  <Button size="m" mode="secondary">
-                    x2
+                  <Button size="m" stretched>
+                    +5KK
+                  </Button>
+                  <Button size="m" stretched>
+                    +10KK
+                  </Button>
+                  <Button size="m" stretched>
+                    +25KK
                   </Button>
                 </div>
+                <div className="inputLayout">
+                  <FormItem
+                    status={betError !== null ? "error" : null}
+                    bottom={betError !== null ? betError : null}
+                  >
+                    <Input
+                      placeholder="Ваша ставка"
+                      value={sum}
+                      onChange={(e) => setSum(e.currentTarget.value)}
+                      type="number"
+                    />
+                    <div className="betButtons">
+                      <Button size="m" mode="secondary">
+                        /2
+                      </Button>
+                      <Button size="m" mode="secondary">
+                        x2
+                      </Button>
+                    </div>
+                  </FormItem>
+                </div>
+                <Button
+                  className="bet"
+                  size="l"
+                  before={<Icon24DoneOutline />}
+                  stretched
+                  onClick={() => {
+                    window.socket.emit("request", {
+                      event: "startGame",
+                      amount: Number(sum).toFixed(0),
+                    });
+                    console.log("test");
+                  }}
+                >
+                  Поставить
+                </Button>
               </div>
-              <Button
-                className="bet"
-                size="l"
-                before={<Icon24DoneOutline />}
-                stretched
-                onClick={() => {
-                  window.socket.emit("request", { event: "startGame" });
-                  console.log("test");
-                }}
-              >
-                Поставить
-              </Button>
-            </div>
+            )}
+            {inGame && (
+              <>
+                {isResult ? (
+                  <>
+                    {gameResult.win ? (
+                      <FormStatus header={"Вы выиграли"} mode="positive">
+                        <span className="verticalText">
+                          {number_format(gameResult.win)}
+                          <Vkc /> (x2.7)
+                        </span>
+                      </FormStatus>
+                    ) : (
+                      <FormStatus header={"Вы проиграли"} mode="error">
+                        <span className="verticalText">
+                          {number_format(gameResult.coins)}
+                          <Vkc />
+                        </span>
+                      </FormStatus>
+                    )}
+                    <Button
+                      className="continue"
+                      onClick={() => restGame()}
+                      size="l"
+                      stretched
+                      before={<Icon24DoneOutline />}
+                    >
+                      Продолжить
+                    </Button>
+                  </>
+                ) : (
+                  <FormStatus header={"Где спрятан приз?"}>
+                    Выберите один из пяти стаканчиков
+                    <div className="koef">x2.7</div>
+                  </FormStatus>
+                )}
+              </>
+            )}
             <div className="hashData">
               <span>Hash: {gameData.myGame.hash}</span>
+              {Object.keys(gameResult).length > 0 && isResult == true && (
+                <span>
+                  Check md5: {gameResult.secret + "@" + gameResult.result}
+                </span>
+              )}
             </div>
-            <div className="historyList">
-              <SimpleCell
-                before={<Avatar src={""} size={40} />}
-                hasHover={false}
-                hasActive={false}
-                description={
-                  <span className="sum plus verticalText">
-                    + {number_format(285000)}<Vkc />
-                  </span>
-                }
-                indicator={
-                  <span className="koef">x4.5</span>
-                }
-              >
-                Михаил Матеевский
-              </SimpleCell>
-              <SimpleCell
-                before={<Avatar src={""} size={40} />}
-                hasHover={false}
-                hasActive={false}
-                description={
-                  <span className="sum minus verticalText">
-                    - {number_format(1852369000)}<Vkc />
-                  </span>
-                }
-                indicator={
-                  <span className="koef">x4.5</span>
-                }
-              >
-                Михаил Матеевский
-              </SimpleCell>
-            </div>
+            {!inGame && (
+              <div className="historyList">
+                <SimpleCell
+                  before={<Avatar src={""} size={40} />}
+                  hasHover={false}
+                  hasActive={false}
+                  description={
+                    <span className="sum plus verticalText">
+                      + {number_format(285000)}
+                      <Vkc />
+                    </span>
+                  }
+                  indicator={<span className="koef">x2.7</span>}
+                >
+                  Михаил Матеевский
+                </SimpleCell>
+                <SimpleCell
+                  before={<Avatar src={""} size={40} />}
+                  hasHover={false}
+                  hasActive={false}
+                  description={
+                    <span className="sum minus verticalText">
+                      - {number_format(1852369000)}
+                      <Vkc />
+                    </span>
+                  }
+                >
+                  Михаил Матеевский
+                </SimpleCell>
+              </div>
+            )}
           </>
         )}
       </div>
