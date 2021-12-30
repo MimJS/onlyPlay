@@ -284,7 +284,7 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
                   onClick={() => {
                     window.socket.emit("request", {
                       event: "startGame",
-                      amount: Number(sum).toFixed(0),
+                      amount: Math.round(sum),
                     });
                     console.log("test");
                   }}
