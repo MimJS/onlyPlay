@@ -90,7 +90,7 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
             setInGame(true);
             setGameData((prevState) => ({
               ...prevState,
-              myGame: { ...gameData.myGame, hash: c.response.hash },
+              myGame: { ...gameData.myGame, hash: c.response.myGame.hash },
             }));
             dispatch({
               type: "updateBalance",
@@ -103,7 +103,11 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
               history: c.response.history,
             }));
             break;
-          case "gameResult":
+          case "endGame":
+            setGameData((prevState) => ({
+              ...prevState,
+              myGame: { ...gameData.myGame, hash: c.response.newGame.hash },
+            }));
             setIsResult(true);
             setGameResult(c.response);
             dispatch({
@@ -146,7 +150,7 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
       return;
     }
     window.socket.emit("request", {
-      event: "chooseThimble",
+      event: "selectThimble",
       value: id,
     });
   };
@@ -198,13 +202,16 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
               {inGame && (
                 <div className={`thimbles ${isResult ? "results" : ""}`}>
                   {[...Array(3)].map((v, i) => (
-                    <div className="thimble" onClick={() => chooseThimble(i+1)}>
+                    <div
+                      className="thimble"
+                      onClick={() => chooseThimble(i + 1)}
+                    >
                       <img className="tgImage" src={thimbleGray} />
                       <img className="tImage" src={thimbleRed} />
                       <img
                         className={`coins ${
                           Object.keys(gameResult).length > 0 &&
-                          gameResult.result == i+1
+                          gameResult.results.result == i + 1
                             ? "showCoins"
                             : ""
                         }`}
@@ -273,20 +280,24 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
               <>
                 {isResult ? (
                   <>
-                    {gameResult.win ? (
-                      <FormStatus header={"Вы выиграли"} mode="positive">
-                        <span className="verticalText">
-                          {number_format(gameResult.win)}
-                          <Vkc /> (x2.7)
-                        </span>
-                      </FormStatus>
-                    ) : (
-                      <FormStatus header={"Вы проиграли"} mode="error">
-                        <span className="verticalText">
-                          {number_format(gameResult.coins)}
-                          <Vkc />
-                        </span>
-                      </FormStatus>
+                    {Object.keys(gameResult).length > 0 && (
+                      <>
+                        {gameResult.results.win ? (
+                          <FormStatus header={"Вы выиграли"} mode="positive">
+                            <span className="verticalText">
+                              {number_format(gameResult.results.win)}
+                              <Vkc /> (x2.7)
+                            </span>
+                          </FormStatus>
+                        ) : (
+                          <FormStatus header={"Вы проиграли"} mode="error">
+                            <span className="verticalText">
+                              {number_format(gameResult.results.coins)}
+                              <Vkc />
+                            </span>
+                          </FormStatus>
+                        )}
+                      </>
                     )}
                     <Button
                       className="continue"
@@ -307,11 +318,21 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
               </>
             )}
             <div className="hashData">
-              <span>Hash: {gameData.myGame.hash}</span>
               {Object.keys(gameResult).length > 0 && isResult == true && (
-                <span>
-                  Check md5: {gameResult.secret + "@" + gameResult.result}
-                </span>
+                <>
+                  <span>Hash: {gameResult.results.hash}</span>
+                  <span>
+                    Check md5:{" "}
+                    {gameResult.results.secret +
+                      "@" +
+                      gameResult.results.result}
+                  </span>
+                </>
+              )}
+              {Object.keys(gameResult).length == 0 && isResult == false && (
+                <>
+                  <span>Hash: {gameData.myGame.hash}</span>
+                </>
               )}
             </div>
             {!inGame && (
@@ -336,7 +357,7 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
                       }
                       indicator={v.win && <span className="koef">x2.7</span>}
                     >
-                      {v.first_name} {v.last_name}
+                      @id{v.id}
                     </SimpleCell>
                   ))}
               </div>
