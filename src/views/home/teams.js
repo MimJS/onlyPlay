@@ -46,12 +46,12 @@ const Teams = ({ id, openView, openErrorXhr }) => {
           vk: window.location.search,
           userId: String(user.vk.id),
         },
-        event: "getTeamsRating",
+        event: "getTeamsData",
       })
       .then((r) => {
         setTeamsData((prevState) => ({
           ...prevState,
-          ratings: r.data.response.ratings,
+          rating: r.data.response.rating,
         }));
         dispatch({
           type: "updatePopout",
@@ -74,14 +74,14 @@ const Teams = ({ id, openView, openErrorXhr }) => {
           vk: window.location.search,
           userId: String(user.vk.id),
         },
-        event: "getTeamsRating",
+        event: "getTeamsData",
       })
       .then((r) => {
         setTeamsData(r.data.response);
         setLoading(false);
         dispatch({
           type: "setCreateTeamCost",
-          payload: r.data.response.teamPrice,
+          payload: r.data.response.settings.teams.createPrice,
         });
         dispatch({
           type: "updatePopout",
@@ -125,35 +125,39 @@ const Teams = ({ id, openView, openErrorXhr }) => {
           Моя команда
         </TabsItem>
       </Tabs>
-      {ui.activeTopTeams === "myteam" && teamsData.myTeam ? (
-        <Placeholder
-          icon={<Icon56GestureOutline fill="rgb(255, 152, 0)" />}
-          stretched
-          header={"Вы не состоите в команде"}
-          action={
-            <div className="buttons">
-              <Button
-                size="m"
-                before={<Icon28AddOutline />}
-                onClick={() => openView("createTeam")}
-              >
-                Создать команду
-              </Button>
-              <Button
-                size="m"
-                before={<Icon28LocationOutline />}
-                onClick={() => changeType("top")}
-              >
-                Найти команду
-              </Button>
-            </div>
-          }
-        >
-          Присоединитесь к команде и получайте множество бонусов за активную
-          игру!
-        </Placeholder>
-      ) : (
-        <div>kek</div>
+      {ui.activeTopTeams === "myteam" && (
+        <>
+          {!teamsData.myTeam ? (
+            <Placeholder
+              icon={<Icon56GestureOutline fill="rgb(255, 152, 0)" />}
+              stretched
+              header={"Вы не состоите в команде"}
+              action={
+                <div className="buttons">
+                  <Button
+                    size="m"
+                    before={<Icon28AddOutline />}
+                    onClick={() => openView("createTeam")}
+                  >
+                    Создать команду
+                  </Button>
+                  <Button
+                    size="m"
+                    before={<Icon28LocationOutline />}
+                    onClick={() => changeType("top")}
+                  >
+                    Найти команду
+                  </Button>
+                </div>
+              }
+            >
+              Присоединитесь к команде и получайте множество бонусов за активную
+              игру!
+            </Placeholder>
+          ) : (
+            <div>kek</div>
+          )}
+        </>
       )}
       {ui.activeTopTeams === "top" && !loading && (
         <>
@@ -163,15 +167,15 @@ const Teams = ({ id, openView, openErrorXhr }) => {
                 Каждую неделю, в ночь с воскресенья на понедельник мы
                 разыгрываем{" "}
                 <div className="count">
-                  {number_format(teamsData.rewards.amount)} VKC + 0.5% всех
-                  ставок
+                  {number_format(teamsData.rating.rewards.amount)} VKC + 0.5%
+                  всех ставок
                 </div>{" "}
                 среди топ-5 кланов.
                 <br />
                 Призовой баланс на данный момент:
                 <br />
                 <div className="sum">
-                  {number_format(teamsData.rewards.current)} VKC
+                  {number_format(teamsData.rating.rewards.current)} VKC
                 </div>
               </div>
             </div>
@@ -180,9 +184,9 @@ const Teams = ({ id, openView, openErrorXhr }) => {
             <div className="panel--in" style={{ paddingTop: 0 }}>
               <List>
                 {teamsData &&
-                  teamsData.ratings.map((v, i) => (
+                  teamsData.rating.teams.map((v, i) => (
                     <SimpleCell
-                      key={i}
+                      key={v.id}
                       before={
                         <>
                           <table className="table">

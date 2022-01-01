@@ -45,6 +45,13 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
   });
   const [startConnection, setStartConnection] = useState(false);
 
+  useEffect(() => {
+    const imageList = [thimbleGray, thimbleRed, thimbleCoins];
+    imageList.forEach((image) => {
+      new Image().src = image;
+    });
+  }, []);
+
   const socket_event = (ws) => {
     ws.on("connect", () => {
       console.log("nice");
