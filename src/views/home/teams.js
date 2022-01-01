@@ -25,16 +25,16 @@ import { number_format } from "../../lib/util";
 const Teams = ({ id, openView, openErrorXhr }) => {
   const dispatch = useDispatch();
   const user = useSelector((s) => s.user);
-  const ui = useSelector((s) => s.ui)
+  const ui = useSelector((s) => s.ui);
   const config = useSelector((s) => s.config);
   const [loading, setLoading] = useState(true);
   const [teamsData, setTeamsData] = useState({});
   const changeType = (n) => {
     if (n !== ui.activeTopTeams) {
       dispatch({
-        type:'setActiveTopTeams',
-        payload:n
-      })
+        type: "setActiveTopTeams",
+        payload: n,
+      });
     }
   };
 
@@ -53,10 +53,6 @@ const Teams = ({ id, openView, openErrorXhr }) => {
           ...prevState,
           ratings: r.data.response.ratings,
         }));
-        dispatch({
-          type: "setCreateTeamCost",
-          payload: r.data.response.teamPrice,
-        });
         dispatch({
           type: "updatePopout",
           payload: {
@@ -83,6 +79,10 @@ const Teams = ({ id, openView, openErrorXhr }) => {
       .then((r) => {
         setTeamsData(r.data.response);
         setLoading(false);
+        dispatch({
+          type: "setCreateTeamCost",
+          payload: r.data.response.teamPrice,
+        });
         dispatch({
           type: "updatePopout",
           payload: {
@@ -125,7 +125,7 @@ const Teams = ({ id, openView, openErrorXhr }) => {
           Моя команда
         </TabsItem>
       </Tabs>
-      {ui.activeTopTeams === "myteam" && (
+      {ui.activeTopTeams === "myteam" && teamsData.myTeam ? (
         <Placeholder
           icon={<Icon56GestureOutline fill="rgb(255, 152, 0)" />}
           stretched
@@ -152,6 +152,8 @@ const Teams = ({ id, openView, openErrorXhr }) => {
           Присоединитесь к команде и получайте множество бонусов за активную
           игру!
         </Placeholder>
+      ) : (
+        <div>kek</div>
       )}
       {ui.activeTopTeams === "top" && !loading && (
         <>

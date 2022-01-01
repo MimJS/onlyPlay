@@ -57,12 +57,13 @@ const MainHome = ({ id, updateUser, openGame, openView, openErrorXhr }) => {
       }
       if (n === "teams") {
         dispatch({
-          type:'updatePopout',
-          payload:{
-            id:'teams',
-            name:<ScreenSpinner size='medium' />
-          }
-        })
+          type: "updatePopout",
+          payload: {
+            id: "teams",
+            name: <ScreenSpinner size="medium" />,
+          },
+        });
+        dispatch({ type: "setActiveTopTeams", payload: "top" });
       }
       if (n === "more") {
         setPromoStatus({
@@ -512,7 +513,12 @@ const MainHome = ({ id, updateUser, openGame, openView, openErrorXhr }) => {
           <Rating id="rating" updateRating={updateRating} />
         </View>
         <View id="teams" activePanel="teams" popout={ui.activePopout.teams}>
-          <Teams id="teams" updateRating={updateRating} openView={openView} openErrorXhr={openErrorXhr} />
+          <Teams
+            id="teams"
+            updateRating={updateRating}
+            openView={openView}
+            openErrorXhr={openErrorXhr}
+          />
         </View>
       </Epic>
     </Panel>
