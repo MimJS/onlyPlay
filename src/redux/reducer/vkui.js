@@ -7,13 +7,14 @@ const init = {
   },
   activePopout: {
     rating: null,
-    game: <ScreenSpinner size='medium'/>,
-    teams: <ScreenSpinner size='medium'/>
+    game: <ScreenSpinner size="medium" />,
+    teams: <ScreenSpinner size="medium" />,
   },
   activeSnackbar: {
     more: null,
   },
   activeUnder: "profile",
+  activeTopTeams: "top",
 };
 
 export const vkuiReducer = (state = init, action) => {
@@ -32,6 +33,8 @@ export const vkuiReducer = (state = init, action) => {
       return { ...state, activeSnackbar: snack };
     case "setActiveUnder":
       return { ...state, activeUnder: action.payload };
+    case "setActiveTopTeams":
+      return { ...state, activeTopTeams: action.payload };
     default:
       return state;
   }

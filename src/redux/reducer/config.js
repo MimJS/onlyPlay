@@ -1,6 +1,6 @@
 const init = {
-  xhr_url: "https://d5370b09a5e151.lhr.life/server/api.php",
-  ws_url: "https://d5370b09a5e151.lhr.life/",
+  xhr_url: "https://ba66446785c520.lhr.life/server/api.php",
+  ws_url: "https://ba66446785c520.lhr.life/",
   appId: 8020410,
   globalData: {},
   loading: false,
@@ -8,6 +8,7 @@ const init = {
   lastGame: null,
   errorType: null,
   gameToken: null,
+  createTeamCost: 0,
 };
 
 export const configReducer = (state = init, action) => {
@@ -24,6 +25,8 @@ export const configReducer = (state = init, action) => {
       return { ...state, errorType: action.payload };
     case "setGameToken":
       return { ...state, gameToken: action.payload };
+    case "setCreateTeamCost":
+      return { ...state, createTeamCost: action.payload };
     default:
       return state;
   }
