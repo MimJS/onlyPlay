@@ -34,7 +34,7 @@ import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
 
-const MainHome = ({ id, updateUser, openGame, openView }) => {
+const MainHome = ({ id, updateUser, openGame, openView, openErrorXhr }) => {
   const [coinInSum, setCoinInSum] = useState(1000000);
   const [coinOutSum, setCoinOutSum] = useState(0);
   const [promo, setPromo] = useState("");
@@ -52,8 +52,17 @@ const MainHome = ({ id, updateUser, openGame, openView }) => {
       if (n === "profile") {
         updateUser();
       }
-      if (n === "rating" || n === "teams") {
+      if (n === "rating") {
         getRating();
+      }
+      if (n === "teams") {
+        dispatch({
+          type:'updatePopout',
+          payload:{
+            id:'teams',
+            name:<ScreenSpinner size='medium' />
+          }
+        })
       }
       if (n === "more") {
         setPromoStatus({
@@ -502,8 +511,8 @@ const MainHome = ({ id, updateUser, openGame, openView }) => {
         <View id="rating" activePanel="rating" popout={ui.activePopout.rating}>
           <Rating id="rating" updateRating={updateRating} />
         </View>
-        <View id="teams" activePanel="teams">
-          <Teams id="teams" updateRating={updateRating} openView={openView} />
+        <View id="teams" activePanel="teams" popout={ui.activePopout.teams}>
+          <Teams id="teams" updateRating={updateRating} openView={openView} openErrorXhr={openErrorXhr} />
         </View>
       </Epic>
     </Panel>

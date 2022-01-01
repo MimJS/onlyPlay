@@ -58,6 +58,9 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
         },
       });
     });
+    ws.on("connect_error", (c) => {
+      openErrorWs(c, "thimble");
+    });
     ws.on("disconnect", (c) => {
       if (c === "io client disconnect") {
         return;

@@ -1,6 +1,6 @@
 const init = {
-  xhr_url: "https://9446382f98de6f.localhost.run/server/api.php",
-  ws_url: "https://9446382f98de6f.localhost.run/",
+  xhr_url: "https://d5370b09a5e151.lhr.life/server/api.php",
+  ws_url: "https://d5370b09a5e151.lhr.life/",
   appId: 8020410,
   globalData: {},
   loading: false,

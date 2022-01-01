@@ -34,51 +34,47 @@ body[scheme="space_gray"] {
     }
     .List {
         padding-top: 10px;
-        .Link {
+        .SimpleCell {
+            padding: 0 8px !important;
+            background: var(--top_button_background);
+            border-radius: var(--br);
             &:not(:first-child) {
-                .SimpleCell {
-                    margin-top: 10px;
+                margin-top: 10px;
+            }
+            .table {
+                margin-right: 7px;
+                .ratingPosition {
+                    color: #4b91ff;
+                    padding-right: 5px;
+                    font-size: 12pt;
+                    text-align: left;
+                    font-weight: 700;
+                    width: 17px;
+                }
+                .myTeam {
+                    border: 2px solid #4b91ff;
+                    box-sizing: border-box;
                 }
             }
-            .SimpleCell {
-                padding: 0 8px !important;
-                background: var(--top_button_background);
-                border-radius: var(--br);
-                .table {
-                    margin-right: 7px;
-                    .ratingPosition {
-                        color: #4b91ff;
-                        padding-right: 5px;
-                        font-size: 12pt;
-                        text-align: left;
-                        font-weight: 700;
-                        width: 17px;
-                    }
-                    .myTeam {
-                        border: 2px solid #4b91ff;
-                        box-sizing: border-box;
-                    }
+            .vkuiSimpleCell__description {
+                font-size: 13px;
+                line-height: 16px;
+            }
+            .prize {
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+                .header {
+                    font-size: 12px;
+                    line-height: 12px;
+                    text-transform: uppercase;
                 }
-                .vkuiSimpleCell__description {
-                    font-size: 13px;
-                    line-height: 16px;
-                }
-                .prize {
-                    align-items: center;
-                    display: flex;
-                    flex-direction: column;
-                    .header {
-                        font-size: 12px;
-                        line-height: 12px;
-                        text-transform: uppercase;
-                    }
-                    .sum {
-                        color: #4b91ff;
-                        font-size: 18px;
-                        line-height: 18px;
-                        text-transform: uppercase;
-                        margin-top: 2px;
-                    }
+                .sum {
+                    color: #4b91ff;
+                    font-size: 18px;
+                    line-height: 18px;
+                    text-transform: uppercase;
+                    margin-top: 2px;
                 }
             }
         }

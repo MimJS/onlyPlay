@@ -244,6 +244,7 @@ const App = () => {
                 updateUser={updateUser}
                 openGame={openGame}
                 openView={openView}
+                openErrorXhr={openErrorXhr}
               />
             </View>
             <View id="createTeam" activePanel={activePanel.createTeam}>
