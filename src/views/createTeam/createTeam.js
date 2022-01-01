@@ -10,8 +10,11 @@ import {
 import { Icon28PictureOutline } from "@vkontakte/icons";
 import { ReactComponent as Vkc } from "../../svg/vkc.svg";
 import { Icon28DoneOutline } from '@vkontakte/icons';
+import { useSelector } from "react-redux";
+import { number_format } from "../../lib/util";
 
 const CreateTeam = ({ id, close }) => {
+  const cost = useSelector((s) => s.config.createTeamCost)
   return (
     <Panel id={id}>
       <PanelHeader separator={false}>
@@ -46,7 +49,7 @@ const CreateTeam = ({ id, close }) => {
           stretched
         >
           <span className="verticalText">
-            Создать за 25 000 000
+            Создать за {number_format(cost)}
             <Vkc />
           </span>
         </Button>

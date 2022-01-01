@@ -26,12 +26,14 @@ const Teams = ({ id, updateRating, openView, openErrorXhr }) => {
   const dispatch = useDispatch();
   const user = useSelector((s) => s.user);
   const config = useSelector((s) => s.config);
-  const [type, setType] = useState("top");
   const [loading, setLoading] = useState(true);
   const [teamsData, setTeamsData] = useState({});
   const changeType = (n) => {
-    if (n !== type) {
-      setType(n);
+    if (n !== config.activeTopTeams) {
+      dispatch({
+        type:'setActiveTopRating',
+        payload:n
+      })
     }
   };
 
@@ -51,6 +53,10 @@ const Teams = ({ id, updateRating, openView, openErrorXhr }) => {
           ratings: r.data.response.ratings,
         }));
         dispatch({
+          type: "setCreateTeamCost",
+          payload: r.data.response.teamPrice,
+        });
+        dispatch({
           type: "updatePopout",
           payload: {
             id: "teams",
@@ -65,29 +71,29 @@ const Teams = ({ id, updateRating, openView, openErrorXhr }) => {
 
   const getTeams = () => {
     axios
-    .post(config.xhr_url, {
-      authorization: {
-        type: "vk-mini-apps",
-        vk: window.location.search,
-        userId: String(user.vk.id),
-      },
-      event: "getTeamsRating",
-    })
-    .then((r) => {
-      setTeamsData(r.data.response);
-      setLoading(false);
-      dispatch({
-        type: "updatePopout",
-        payload: {
-          id: "teams",
-          name: null,
+      .post(config.xhr_url, {
+        authorization: {
+          type: "vk-mini-apps",
+          vk: window.location.search,
+          userId: String(user.vk.id),
         },
+        event: "getTeamsRating",
+      })
+      .then((r) => {
+        setTeamsData(r.data.response);
+        setLoading(false);
+        dispatch({
+          type: "updatePopout",
+          payload: {
+            id: "teams",
+            name: null,
+          },
+        });
+      })
+      .catch((e) => {
+        openErrorXhr(e);
       });
-    })
-    .catch((e) => {
-      openErrorXhr(e);
-    });
-  }
+  };
 
   useEffect(() => {
     if (loading === true) {
@@ -106,19 +112,19 @@ const Teams = ({ id, updateRating, openView, openErrorXhr }) => {
         <TabsItem
           hasHover={false}
           onClick={() => changeType(`top`)}
-          selected={type === "top"}
+          selected={config.activeTopTeams === "top"}
         >
           Топ команд
         </TabsItem>
         <TabsItem
           hasHover={false}
           onClick={() => changeType(`myteam`)}
-          selected={type === "myteam"}
+          selected={config.activeTopTeams === "myteam"}
         >
           Моя команда
         </TabsItem>
       </Tabs>
-      {type === "myteam" && (
+      {config.activeTopTeams === "myteam" && (
         <Placeholder
           icon={<Icon56GestureOutline fill="rgb(255, 152, 0)" />}
           stretched
@@ -146,7 +152,7 @@ const Teams = ({ id, updateRating, openView, openErrorXhr }) => {
           игру!
         </Placeholder>
       )}
-      {type === "top" && !loading && (
+      {config.activeTopTeams === "top" && !loading && (
         <>
           <div className="panel--in" style={{ paddingBottom: 0 }}>
             <div className="ratingBanner">
@@ -167,7 +173,7 @@ const Teams = ({ id, updateRating, openView, openErrorXhr }) => {
               </div>
             </div>
           </div>
-          <PullToRefresh onRefresh={() => updateTeams(type)} isFetching={false}>
+          <PullToRefresh onRefresh={() => updateTeams()} isFetching={false}>
             <div className="panel--in" style={{ paddingTop: 0 }}>
               <List>
                 {teamsData &&
