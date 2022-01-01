@@ -22,16 +22,17 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { number_format } from "../../lib/util";
 
-const Teams = ({ id, updateRating, openView, openErrorXhr }) => {
+const Teams = ({ id, openView, openErrorXhr }) => {
   const dispatch = useDispatch();
   const user = useSelector((s) => s.user);
+  const ui = useSelector((s) => s.ui)
   const config = useSelector((s) => s.config);
   const [loading, setLoading] = useState(true);
   const [teamsData, setTeamsData] = useState({});
   const changeType = (n) => {
-    if (n !== config.activeTopTeams) {
+    if (n !== ui.activeTopTeams) {
       dispatch({
-        type:'setActiveTopRating',
+        type:'setActiveTopTeams',
         payload:n
       })
     }
@@ -112,19 +113,19 @@ const Teams = ({ id, updateRating, openView, openErrorXhr }) => {
         <TabsItem
           hasHover={false}
           onClick={() => changeType(`top`)}
-          selected={config.activeTopTeams === "top"}
+          selected={ui.activeTopTeams === "top"}
         >
           Топ команд
         </TabsItem>
         <TabsItem
           hasHover={false}
           onClick={() => changeType(`myteam`)}
-          selected={config.activeTopTeams === "myteam"}
+          selected={ui.activeTopTeams === "myteam"}
         >
           Моя команда
         </TabsItem>
       </Tabs>
-      {config.activeTopTeams === "myteam" && (
+      {ui.activeTopTeams === "myteam" && (
         <Placeholder
           icon={<Icon56GestureOutline fill="rgb(255, 152, 0)" />}
           stretched
@@ -152,7 +153,7 @@ const Teams = ({ id, updateRating, openView, openErrorXhr }) => {
           игру!
         </Placeholder>
       )}
-      {config.activeTopTeams === "top" && !loading && (
+      {ui.activeTopTeams === "top" && !loading && (
         <>
           <div className="panel--in" style={{ paddingBottom: 0 }}>
             <div className="ratingBanner">
