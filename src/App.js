@@ -41,7 +41,6 @@ const App = () => {
   const user = useSelector((s) => s.user);
   const ui = useSelector((s) => s.ui);
   const dispatch = useDispatch();
-
   const photos = [
     background,
     balance,
@@ -177,9 +176,20 @@ const App = () => {
         updateUser(vk);
       }
     }
+    
     getVk();
   });
-
+  useEffect(()=>{
+    bridge.send("VKWebAppGetAuthToken", {
+      app_id: config.appId,
+      scope: "friends",
+    }).then((token)=>{
+    token.access_token && dispatch({
+      type: "setUserToken",
+      payload: token.access_token,
+    });
+  })
+  },[])
   const getToken = async (name) => {
     return new Promise((res) => {
       axios

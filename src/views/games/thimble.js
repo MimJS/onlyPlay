@@ -10,6 +10,7 @@ import {
   FormStatus,
   FormItem,
 } from "@vkontakte/vkui";
+import bridge from "@vkontakte/vk-bridge";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { io } from "socket.io-client";
@@ -31,9 +32,22 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
   const [betError, setBetError] = useState(null);
   const dispatch = useDispatch();
   const [token, setToken] = useState(null);
-  const [sum, setSum] = useState(null);
+  const [sum, setSum] = useState(0);
   const [vkData, setVkData] = useState([]);
   const [sortFinish, setSortFinish] = useState(false);
+  const [usersData, setUsersData] = useState([]);
+  const vkToken = useSelector((s) => s.user.token);
+  const getUserData = async (history)=>{
+    const ids = history.map((el)=>el.id);
+    const userData = await bridge.send("VKWebAppCallAPIMethod",
+     {method: "users.get", params: {access_token: vkToken, user_ids: ids.join(','), fields: "photo_100", "v": "5.131"}
+    });
+    console.log(userData,ids);
+    setUsersData(userData.response);
+  }
+  const addToSum = (count)=>{
+    setSum(sum+count>user.db.coins ? user.db.count : sum + count)
+  }
   const socket = io(config.ws_url, {
     path: "/server/websocket.php",
     autoConnect: false,
@@ -89,6 +103,7 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
       } else {
         switch (c.event) {
           case "initGame":
+            getUserData(c.response.history);
             setGameData(c.response);
             break;
           case "startGame":
@@ -108,9 +123,10 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
             });
             break;
           case "updateGame":
+            getUserData(c.response.history);
             setGameData((prevState) => ({
               ...prevState,
-              history: c.response.history,
+              history: c.response.history
             }));
             break;
           case "endGame":
@@ -235,16 +251,16 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
             {!inGame && (
               <div className="betTable">
                 <div className="buttonsRow">
-                  <Button size="m" stretched>
+                  <Button onClick={()=>{addToSum(1000000)}} size="m" stretched>
                     +1KK
                   </Button>
-                  <Button size="m" stretched>
+                  <Button onClick={()=>{addToSum(5000000)}} size="m" stretched>
                     +5KK
                   </Button>
-                  <Button size="m" stretched>
+                  <Button onClick={()=>{addToSum(10000000)}} size="m" stretched>
                     +10KK
                   </Button>
-                  <Button size="m" stretched>
+                  <Button onClick={()=>{addToSum(25000000)}} size="m" stretched>
                     +25KK
                   </Button>
                 </div>
@@ -255,15 +271,14 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
                   >
                     <Input
                       placeholder="Ваша ставка"
-                      value={sum}
-                      onChange={(e) => setSum(e.currentTarget.value)}
-                      type="number"
+                      value={String(sum).replace(/[^0-9]/g, "").match(/.{1,3}/g).join(' ')}
+                      onChange={(e) => setSum(Number(e.currentTarget.value))}
                     />
                     <div className="betButtons">
-                      <Button size="m" mode="secondary">
+                      <Button onClick={()=>{setSum(Math.floor(sum/2))}} size="m" mode="secondary">
                         /2
                       </Button>
-                      <Button size="m" mode="secondary">
+                      <Button onClick={()=>{setSum(sum*2>user.db.coins ? user.db.coins : sum*2)}} size="m" mode="secondary">
                         x2
                       </Button>
                     </div>
@@ -348,10 +363,12 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
             {!inGame && (
               <div className="historyList">
                 {gameData.history &&
-                  gameData.history.map((v, i) => (
+                  gameData.history.map((v, i) => {
+                    const vkUser = usersData.find((e)=>e.id===v.id);
+                    return (
                     <SimpleCell
                       key={i}
-                      before={<Avatar src={v.photo_100} size={40} />}
+                      before={<Avatar onClick={()=>{window.open("https://vk.com/id"+v.id, "_blank")}} src={vkUser && vkUser.photo_100} size={40} />}
                       hasHover={false}
                       hasActive={false}
                       description={
@@ -367,9 +384,9 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
                       }
                       indicator={v.win && <span className="koef">x2.7</span>}
                     >
-                      @id{v.id}
-                    </SimpleCell>
-                  ))}
+                      {vkUser ? vkUser.first_name+" "+vkUser.last_name : `@id${v.id}`}
+                    </SimpleCell>)
+        })}
               </div>
             )}
           </>

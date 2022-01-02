@@ -93,7 +93,7 @@ const Rating = ({ id, updateRating }) => {
             });
             const token = await bridge.send("VKWebAppGetAuthToken", {
               app_id: 8020410,
-              scope: "",
+              scope: "friends",
             });
             dispatch({
               type: "updatePopout",
