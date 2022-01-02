@@ -38,6 +38,16 @@ const Profile = ({ id, updateUser, openView }) => {
     });
   }, []);
 
+  const getStatPercent = (statisticType, winType, whichType) => {
+    if(statisticType === 'day') {
+      if(winType === 'win'){
+        
+      } else {
+
+      }
+    }
+  }
+
   return (
     <Panel id={id}>
       <PanelHeader separator={false}>
@@ -127,7 +137,16 @@ const Profile = ({ id, updateUser, openView }) => {
                   <Icon24Poll width={18} height={18} />
                 )}
               </div>
-              <div className="block--in">
+              <div
+                className="block--in"
+                style={{
+                  width: `${getStatPercent(
+                    "day",
+                    "win",
+                    statType === "win" ? "winCount" : "winAmmount"
+                  )}%`,
+                }}
+              >
                 <span>выигрыши</span>
                 <span>
                   {statType.day === "win"
