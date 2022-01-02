@@ -271,7 +271,7 @@ const Thimble = ({ id, close, getToken, openErrorWs }) => {
                   >
                     <Input
                       placeholder="Ваша ставка"
-                      value={String(sum).replace(/[^0-9]/g, "").match(/.{1,3}/g).join(' ')}
+                      value={sum}
                       onChange={(e) => setSum(Number(e.currentTarget.value))}
                     />
                     <div className="betButtons">
