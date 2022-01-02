@@ -10,7 +10,7 @@ import { Icon28MoneyRequestOutline } from "@vkontakte/icons";
 import { Icon28MoneySendOutline } from "@vkontakte/icons";
 import { Icon24Coins } from "@vkontakte/icons";
 import { useEffect, useState } from "react";
-import { Icon28SendOutline } from "@vkontakte/icons";
+import { Icon28SendOutline, Icon24Poll } from "@vkontakte/icons";
 //import online from "../../img/online.png";
 import { useSelector, useDispatch } from "react-redux";
 import util from "../../lib/util";
@@ -20,6 +20,7 @@ import sell from "../../img/sell.png";
 import transfer from "../../img/transfer.jpg";
 import stat_all from "../../img/stat_all.jpg";
 import stat_today from "../../img/stat_today.jpg";
+import formatNumber from "../../lib/format";
 
 const Profile = ({ id, updateUser, openView }) => {
   const user = useSelector((s) => s.user);
@@ -115,16 +116,23 @@ const Profile = ({ id, updateUser, openView }) => {
               </div>
               <div
                 className="right_btn"
-                onClick={() => setStatType({ ...statType })}
+                onClick={() => {
+                  let newValue = statType.day === "win" ? "coins" : "win";
+                  setStatType({ ...statType, day: newValue });
+                }}
               >
-                <Icon24Coins width={18} height={18} />
+                {statType.day === "win" ? (
+                  <Icon24Coins width={18} height={18} />
+                ) : (
+                  <Icon24Poll width={18} height={18} />
+                )}
               </div>
               <div className="block--in">
                 <span>выигрыши</span>
                 <span>
                   {statType.day === "win"
                     ? user.db.stat_day_win
-                    : user.db.stat_day_win_sum}
+                    : formatNumber(user.db.stat_day_win_amount)}
                 </span>
               </div>
               <div className="block--in">
@@ -132,7 +140,7 @@ const Profile = ({ id, updateUser, openView }) => {
                 <span>
                   {statType.day === "win"
                     ? user.db.stat_day_lose
-                    : user.db.stat_day_lose_sum}
+                    : formatNumber(user.db.stat_day_lose_amount)}
                 </span>
               </div>
             </div>
@@ -141,7 +149,11 @@ const Profile = ({ id, updateUser, openView }) => {
                 <span>за все время</span>
               </div>
               <div className="right_btn">
-                <Icon24Coins width={18} height={18} />
+                {statType.all === "win" ? (
+                  <Icon24Coins width={18} height={18} />
+                ) : (
+                  <Icon24Poll width={18} height={18} />
+                )}
               </div>
               <div className="block--in">
                 <span>выигрыши</span>
