@@ -1,4 +1,7 @@
 export default function formatNumber(number) {
+    if(number === 0){
+        return number
+    }
     let k = "";
     while (number >=1000){
         number/=1000;
