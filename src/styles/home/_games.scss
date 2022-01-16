@@ -22,18 +22,19 @@ body[scheme="space_gray"] {
             align-items: center;
         }
         .block--game {
-            width: calc(50% - 5px);
+            width: calc(33.3% - 10px);
             border-radius: var(--br);
             background: var(--game_button_background);
             @extend %button_click;
-            &:nth-child(2n) {
+            &:nth-child(2), &:nth-child(5), &:nth-child(8) {
                 margin-left: 10px;
+                margin-right: 10px;
             }
             &:not(:last-child) {
                 margin-bottom: 10px;
             }
             .bg {
-                height: 100px;
+                height: 215px;
                 border-radius: var(--br);
                 background: var(--game_button_background);
                 position: relative;
@@ -45,13 +46,16 @@ body[scheme="space_gray"] {
                     top: 0px;
                     align-items: center;
                     font-size: 13px;
-                    color: black;
+                    color: white;
                     font-weight: 300;
                     display: flex;
                     background: var(--game_button_background);
                     padding: 2px 4px;
                     border-radius: 0 0 var(--br) 0;
                     padding:5px 7px;
+                    .Icon {
+                        margin-right: 2px;
+                    }
                     img {
                         width: 21px;
                         height: 21px;
@@ -82,19 +86,24 @@ body[scheme="space_gray"] {
                 text-transform: uppercase;
             }
         }
-        .game--blackjack {
+        .game--coinflip {
             .bg {
-                background: url('../../img/blackjack.jpg');
+                background: url('../../img/coinflip.png');
             }
         }
-        .game--doubleDice {
+        .game--crash {
             .bg {
-                background: url("../../img/doubleDice.jpg");
+                background: url('../../img/crash.png');
+            }
+        }
+        .game--hilo {
+            .bg {
+                background: url("../../img/hilo.png");
             }
         }
         .game--ninja {
             .bg {
-                background: url("../../img/ninja.jpg");
+                background: url("../../img/ninja.png");
             }
         }
         .game--dice {
@@ -102,34 +111,24 @@ body[scheme="space_gray"] {
                 background: url("../../img/dice.png");
             }
         }
-        .game--dreamCatcher {
+        .game--keno {
             .bg {
-                background: url("../../img/dreamCatcher.jpg");
+                background: url("../../img/keno.png");
             }
         }
         .game--tower {
             .bg {
-                background: url("../../img/tower.jpg");
+                background: url("../../img/tower.png");
             }
         }
-        .game--keno {
+        .game--roulette {
             .bg {
-                background: url("../../img/keno.jpg");
+                background: url("../../img/roulette.png");
             }
         }
-        .game--b7m {
+        .game--wheel {
             .bg {
-                background: url("../../img/b7m.png");
-            }
-        }
-        .game--thimble {
-            .bg {
-                background: url("../../img/thimble.png");
-            }
-        }
-        .game--dicewheel {
-            .bg {
-                background: url("../../img/dicewheel.png");
+                background: url("../../img/wheel.png");
             }
         }
     }

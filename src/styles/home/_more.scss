@@ -5,6 +5,9 @@
         &:not(:first-child) {
             margin-top: 10px;
         }
+        .SimpleCell__children {
+            font-size: 16px !important;
+        }
     }
     .Link {
         .SimpleCell {

@@ -10,3 +10,8 @@ body[scheme="space_gray"] {
     margin:0;
     border-radius: var(--br) var(--br) 0 0 !important;
 }
+
+.vkuiModalPageHeader__in {
+    background-color: var(--modal_header_background);
+    border-radius: var(--br);
+}

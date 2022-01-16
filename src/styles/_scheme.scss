@@ -1,17 +1,35 @@
 body[scheme="bright_light"],
 body[scheme="vkcom_light"],
-body[scheme="vkcom_dark"] {
+body[scheme="vkcom_dark"],
+body[scheme="space_gray"] {
     // variables
-    --menu_button_background: #e5e5e5;
-    --game_button_background: #e5e5e5;
+    --menu_button_background: #262b37;
+    --game_button_background: transparent;
     --top_button_background: #e5e5e5;
     --rating_disable_background: #e5e5e5;
-    --modal_background:white;
-    --stat_background:white;
-    --balance_block_background:#e5e5e5;
-    --table_block_background:#e5e5e5;
+    --modal_background: #282d38;
+    --modal_header_background: #2d3340;
+    --stat_background: #1e222b;
+    --balance_block_background: #e5e5e5;
+    --table_block_background: #e5e5e5;
+    // vk ui
+    --background_content: #20242d;
+    --header_background: #20242d;
+    --header_alternate_background: #1c2028;
+    --separator_common: #262c39;
+    --tabbar_inactive_icon: #748198;
+    --tabbar_active_icon: #fff;
+    --text_primary: #fff;
+    --header_tint_alternate: #fff;
+    --header_text_alternate: #fff;
+    --field_background: #1d222b;
+    --field_border:transparent;
+    --accent:#535d71;
+    --button_primary_background: #3077f7;
+    --modal_card_background: #282d38;
+    --overlay_status_icon: #748198;
 }
-
+/*
 body[scheme="space_gray"] {
     // variables
     --menu_button_background: #303030;
@@ -23,3 +41,4 @@ body[scheme="space_gray"] {
     --balance_block_background:#303030;
     --table_block_background:#303030;
 }
+*/

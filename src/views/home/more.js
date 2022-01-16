@@ -25,17 +25,25 @@ const More = ({ id }) => {
       </PanelHeader>
       <div className="panel--in">
         <SimpleCell
+          hasHover={false}
+          hasActive={false}
           before={<Icon24AddOutline fill="#FD980B" />}
           onClick={() => bridge.send("VKWebAppAddToCommunity")}
         >
           Добавить в сообщество
         </SimpleCell>
         <Link href="https://t.me/vkonlyplay" target="_blank">
-          <SimpleCell before={<Icon24Send fill="rgb(3, 169, 244)" />}>
+          <SimpleCell
+            hasHover={false}
+            hasActive={false}
+            before={<Icon24Send fill="rgb(3, 169, 244)" />}
+          >
             Наш канал с промокодами
           </SimpleCell>
         </Link>
         <SimpleCell
+          hasHover={false}
+          hasActive={false}
           before={<Icon24Gift fill="rgb(156, 39, 176)" />}
           onClick={() => {
             dispatch({
@@ -53,15 +61,29 @@ const More = ({ id }) => {
           href="https://vk.me/join/AJQ1d4NFtx4GTneX3BzeRMA2"
           target="_blank"
         >
-          <SimpleCell before={<Icon24Message fill="#E9608E" />}>
+          <SimpleCell
+            hasHover={false}
+            hasActive={false}
+            before={<Icon24Message fill="#E9608E" />}
+          >
             Чат игроков
           </SimpleCell>
         </Link>
         <Link href="https://vk.com/vkonlyplay" target="_blank">
-          <SimpleCell before={<Icon24LogoVk />}>Наша группа</SimpleCell>
+          <SimpleCell
+            hasHover={false}
+            hasActive={false}
+            before={<Icon24LogoVk fill="#0077ff" />}
+          >
+            Наша группа
+          </SimpleCell>
         </Link>
         <Link href="https://vk.com/vkonlyplay_help" target="_blank">
-          <SimpleCell before={<Icon24Headphones fill="#94D45C" />}>
+          <SimpleCell
+            hasHover={false}
+            hasActive={false}
+            before={<Icon24Headphones fill="#94D45C" />}
+          >
             Тех. Поддержка
           </SimpleCell>
         </Link>

@@ -46,7 +46,7 @@ const Teams = ({ id, openView, openErrorXhr }) => {
           vk: window.location.search,
           userId: String(user.vk.id),
         },
-        event: "getTeamsData",
+        event: "getTeamsRating",
       })
       .then((r) => {
         setTeamsData((prevState) => ({
@@ -74,7 +74,7 @@ const Teams = ({ id, openView, openErrorXhr }) => {
           vk: window.location.search,
           userId: String(user.vk.id),
         },
-        event: "getTeamsData",
+        event: "getTeamsRating",
       })
       .then((r) => {
         setTeamsData(r.data.response);
@@ -98,7 +98,7 @@ const Teams = ({ id, openView, openErrorXhr }) => {
 
   useEffect(() => {
     if (loading === true) {
-      getTeams();
+      //getTeams();
     }
   }, [loading]);
 
@@ -109,6 +109,12 @@ const Teams = ({ id, openView, openErrorXhr }) => {
           Команды
         </PanelHeaderContent>
       </PanelHeader>
+      <div className="panel--in">
+        <div className="rating_disabled">
+          <span className="in">Топ команд будет запущен скоро</span>
+        </div>
+      </div>
+      {/* 
       <Tabs>
         <TabsItem
           hasHover={false}
@@ -223,6 +229,7 @@ const Teams = ({ id, openView, openErrorXhr }) => {
           </PullToRefresh>
         </>
       )}
+      */}
     </Panel>
   );
 };

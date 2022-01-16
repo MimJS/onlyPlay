@@ -1,4 +1,4 @@
-body[scheme="space_gray"]{
+/*body[scheme="space_gray"]{
     #profile {
         .block--stat {
             .up_text {
@@ -14,7 +14,7 @@ body[scheme="space_gray"]{
             }
         }
     }
-}
+}*/
 
 #profile {
     .PanelHeader {
@@ -97,7 +97,6 @@ body[scheme="space_gray"]{
                     font-weight: 400;
                     color: white;
                     margin-top: 5px;
-                    
                 }
                 .Icon {
                     svg {
@@ -130,12 +129,13 @@ body[scheme="space_gray"]{
             display: flex;
             justify-content: center;
             align-items: center;
-            
+
             span {
                 padding: 5px 10px;
                 text-transform: uppercase;
                 background-color: var(--stat_background);
-                mix-blend-mode: screen;
+                mix-blend-mode: darken;
+                color: white;
                 font-size: 16px;
                 font-weight: 600;
                 border-radius: 0 0 var(--br) var(--br);
@@ -167,7 +167,7 @@ body[scheme="space_gray"]{
             justify-content: center;
             align-items: center;
             background-color: rgba(3, 169, 244, 0.8);
-            
+
             &:last-child {
                 background-color: rgba(236, 64, 122, 0.8);
             }
@@ -207,7 +207,7 @@ body[scheme="space_gray"]{
             font-weight: 400;
             display: flex;
             //background:#F7F7F7;
-            padding:2px 4px;
+            padding: 2px 4px;
             border-radius: var(--br);
             img {
                 width: 21px;

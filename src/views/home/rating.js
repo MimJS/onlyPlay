@@ -135,6 +135,7 @@ const Rating = ({ id, updateRating }) => {
           Рейтинг
         </PanelHeaderContent>
       </PanelHeader>
+      {/*
       <Tabs>
         <TabsItem
           hasHover={false}
@@ -158,7 +159,15 @@ const Rating = ({ id, updateRating }) => {
           Топ недели
         </TabsItem>
       </Tabs>
-      <div className="panel--in" style={{ paddingBottom: 0 }}>
+      */}
+      <div
+        className="panel--in"
+        style={
+          {
+            /*paddingBottom: 0*/
+          }
+        }
+      >
         {type === "hour" && Object.keys(rating).length > 0 && (
           <div className="paddingWrapper">
             <div className="ratingBanner">
@@ -271,15 +280,19 @@ const Rating = ({ id, updateRating }) => {
           </div>
         )}
       </div>
+      {type === "hour" && (
+        <div className="rating_disabled">
+          <span className="in">
+            Топ дня будет запущен за час до следующей выдачи
+          </span>
+        </div>
+      )}
       <PullToRefresh onRefresh={() => updateRating(type)} isFetching={false}>
         <div className="panel--in" style={{ paddingTop: 0 }}>
           <List>
             {type === "hour" && (
-              <div className="rating_disabled">
-                <span className="in">
-                  Топ дня будет запущен за час до следующей выдачи
-                </span>
-              </div>
+              //code
+              <></>
             )}
             {type === "week" &&
               Object.keys(rating).length > 0 &&

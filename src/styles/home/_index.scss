@@ -1,1 +1,15 @@
-@import './profile', './more', './games', './teams', './rating'
+@import "./profile", "./more", "./games", "./teams", "./rating";
+.vkuiTabbarItem {
+    .vkuiTabbarItem__text {
+        height: 0px;
+        margin-top: 0px;
+        transition: all .2s linear;
+    }
+}
+
+.TabbarItem--selected {
+    .vkuiTabbarItem__text {
+        height: fit-content !important;
+        margin-top: 2px !important;
+    }
+}

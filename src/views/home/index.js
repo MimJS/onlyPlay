@@ -24,6 +24,7 @@ import { Icon24MoneyTransfer } from "@vkontakte/icons";
 import { Icon24Coins } from "@vkontakte/icons";
 import { Icon24DoneOutline } from "@vkontakte/icons";
 import { Icon48WritebarDone } from "@vkontakte/icons";
+import { Icon28SettingsOutline } from '@vkontakte/icons';
 
 import Profile from "./profile";
 import More from "./more";
@@ -56,6 +57,7 @@ const MainHome = ({ id, updateUser, openGame, openView, openErrorXhr }) => {
         getRating();
       }
       if (n === "teams") {
+        /*
         dispatch({
           type: "updatePopout",
           payload: {
@@ -63,6 +65,7 @@ const MainHome = ({ id, updateUser, openGame, openView, openErrorXhr }) => {
             name: <ScreenSpinner size="medium" />,
           },
         });
+        */
         dispatch({ type: "setActiveTopTeams", payload: "top" });
       }
       if (n === "more") {
@@ -356,14 +359,14 @@ const MainHome = ({ id, updateUser, openGame, openView, openErrorXhr }) => {
           </ModalPageHeader>
         }
       >
-        <FormItem top="Введите сумму пополнения:" style={{ paddingTop: 0 }}>
+        <FormItem top="Введите сумму пополнения:">
           <Input
             type="number"
             value={coinInSum}
             onChange={(e) => setCoinInSum(e.currentTarget.value)}
           />
         </FormItem>
-        <FormItem style={{ paddingTop: 0 }}>
+        <FormItem>
           <Button
             size="l"
             disabled={coinInSum === 0}
@@ -419,14 +422,14 @@ const MainHome = ({ id, updateUser, openGame, openView, openErrorXhr }) => {
           </ModalPageHeader>
         }
       >
-        <FormItem top="Введите сумму вывода:" style={{ paddingTop: 0 }}>
+        <FormItem top="Введите сумму вывода:">
           <Input
             type="number"
             value={coinOutSum}
             onChange={(e) => setCoinOutSum(e.currentTarget.value)}
           />
         </FormItem>
-        <FormItem style={{ paddingTop: 0 }}>
+        <FormItem>
           <Button
             size="l"
             stretched
@@ -468,12 +471,17 @@ const MainHome = ({ id, updateUser, openGame, openView, openErrorXhr }) => {
               >
                 <Icon28UserCircleOutline />
               </TabbarItem>
+              {/*
               <TabbarItem
                 onClick={() => setSub("teams")}
                 selected={ui.activeUnder === "teams"}
                 text="Команды"
               >
                 <Icon28Users3Outline />
+              </TabbarItem>
+               */}
+              <TabbarItem>
+                <Icon28SettingsOutline className="rotate" />
               </TabbarItem>
               <TabbarItem
                 onClick={() => setSub("games")}

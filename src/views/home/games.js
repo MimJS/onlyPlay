@@ -4,7 +4,7 @@ import Game from "../../components/Game";
 import { useSelector } from "react-redux";
 
 const Games = ({ id, openGame }) => {
-  const online = useSelector((s) => s.config.globalData.gamesOnline)
+  const online = useSelector((s) => s.config.globalData.gamesOnline);
   return (
     <Panel id={id}>
       <PanelHeader separator={false}>
@@ -14,35 +14,18 @@ const Games = ({ id, openGame }) => {
       </PanelHeader>
       <div className="panel--in game--list">
         <Game
-          gameName="Thimble"
           onlineCount={552}
-          className="game--thimble"
-          onClick={() => openGame("thimble")}
+          className="game--coinflip"
+          onClick={() => openGame("coinflip")}
         />
-        <Game
-          gameName="Dream Catcher"
-          onlineCount={0}
-          className="game--dreamCatcher"
-        />
-        <Game
-          gameName="Double dice"
-          onlineCount={0}
-          className="game--doubleDice"
-        />
-        <Game gameName="Dice" onlineCount={0} className="game--dice" />
-        <Game
-          gameName="Blackjack"
-          onlineCount={0}
-          className="game--blackjack"
-        />
-        <Game gameName="Tower" onlineCount={0} className="game--tower" />
-        <Game gameName="Keno" onlineCount={0} className="game--keno" />
-        <Game gameName="Под 7 над" onlineCount={0} className="game--b7m" />
-        <Game
-          gameName="Dicewheel"
-          onlineCount={0}
-          className="game--dicewheel"
-        />
+        <Game onlineCount={0} className="game--dice" />
+        <Game onlineCount={0} className="game--crash" />
+        <Game onlineCount={0} className="game--hilo" />
+        <Game onlineCount={0} className="game--tower" />
+        <Game onlineCount={0} className="game--keno" />
+        <Game onlineCount={0} className="game--roulette" />
+        <Game onlineCount={0} className="game--ninja" />
+        <Game onlineCount={0} className="game--wheel" />
       </div>
     </Panel>
   );

@@ -8,7 +8,7 @@ const init = {
   activePopout: {
     rating: null,
     game: <ScreenSpinner size="medium" />,
-    teams: <ScreenSpinner size="medium" />,
+    teams: null,
   },
   activeSnackbar: {
     more: null,

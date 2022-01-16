@@ -39,14 +39,12 @@ const Profile = ({ id, updateUser, openView }) => {
   }, []);
 
   const getStatPercent = (statisticType, winType, whichType) => {
-    if(statisticType === 'day') {
-      if(winType === 'win'){
-        
+    if (statisticType === "day") {
+      if (winType === "win") {
       } else {
-
       }
     }
-  }
+  };
 
   return (
     <Panel id={id}>
@@ -113,6 +111,7 @@ const Profile = ({ id, updateUser, openView }) => {
                 </div>
               </div>
             </div>
+            {/*
             <div
               className="block--transfer"
               onClick={() => openView("transfer")}
@@ -120,6 +119,7 @@ const Profile = ({ id, updateUser, openView }) => {
               <Icon28SendOutline width={48} height={48} />
               <span className="text">Перевести другу</span>
             </div>
+            */}
             <div className="block--stat block--stat-today">
               <div className="up_text">
                 <span>статистика за день</span>

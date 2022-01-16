@@ -11,6 +11,21 @@ body[scheme="space_gray"] {
 }
 
 #rating {
+    .rating_disabled {
+        display: flex;
+        justify-content: center;
+        .in {
+            width: fit-content;
+            align-items: center;
+            font-size: 13px;
+            color: #818c99;
+            font-weight: 400;
+            display: flex;
+            padding: 5px 7px;
+            border-radius: var(--br);
+            text-align: center;
+        }
+    }
     .ratingBanner {
         background: url("../../img/buy.png") 50% no-repeat;
         background-size: cover;
@@ -114,21 +129,6 @@ body[scheme="space_gray"] {
                         margin-top: 2px;
                     }
                 }
-            }
-        }
-        .rating_disabled {
-            display: flex;
-            justify-content: center;
-            .in {
-                width: fit-content;
-                align-items: center;
-                font-size: 13px;
-                color: black;
-                font-weight: 400;
-                display: flex;
-                padding: 5px 7px;
-                border-radius: var(--br);
-                text-align: center;
             }
         }
     }

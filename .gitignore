@@ -13,6 +13,7 @@
 
 #other_files
 /img
+/backend
 
 # misc
 .DS_Store
