@@ -13,6 +13,22 @@ body[scheme="space_gray"] {
     }
 }
 
+@media screen and (max-width:617px){
+    #games {
+        .game--list {
+            .block--game {
+                width: calc(50% - 5px) !important;
+                &:nth-child(2), &:nth-child(5), &:nth-child(8) {
+                    margin:0px !important;
+                }
+                &:nth-child(2n){
+                    margin-left: 10px !important;
+                }
+            }
+        }
+    }
+}
+
 #games {
     .game--list {
         & {
@@ -25,13 +41,11 @@ body[scheme="space_gray"] {
             width: calc(33.3% - 10px);
             border-radius: var(--br);
             background: var(--game_button_background);
+            margin-bottom: 10px;
             @extend %button_click;
             &:nth-child(2), &:nth-child(5), &:nth-child(8) {
                 margin-left: 10px;
                 margin-right: 10px;
-            }
-            &:not(:last-child) {
-                margin-bottom: 10px;
             }
             .bg {
                 height: 215px;

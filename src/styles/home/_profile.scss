@@ -24,7 +24,8 @@
     }
     .block--balance {
         height: 128px;
-        background: url("../../img/balance.png");
+        //background: url("../../img/balance.png");
+        background: var(--profile_block_background);
         background-position: center center;
         background-size: cover;
         border-radius: var(--br);
@@ -57,7 +58,8 @@
         align-items: center;
         height: 88px;
         border-radius: var(--br);
-        background: url("../../img/transfer.jpg");
+        //background: url("../../img/transfer.jpg");
+        background: var(--profile_block_background);
         @extend %background-center-cover;
         @extend %button_click;
         .Icon {
@@ -106,11 +108,13 @@
             }
         }
         .block--payin {
-            background: url("../../img/buy.png");
+            //background: url("../../img/buy.png");
+            background: var(--profile_block_background);
             @extend %background-center-cover;
         }
         .block--payout {
-            background: url("../../img/sell.png");
+            //background: url("../../img/sell.png");
+            background: var(--profile_block_background);
             @extend %background-center-cover;
         }
     }
@@ -187,11 +191,13 @@
         }
     }
     .block--stat-today {
-        background: url("../../img/stat_today.jpg");
+        //background: url("../../img/stat_today.jpg");
+        background: var(--profile_block_background);
         @extend %background-center-cover;
     }
     .block--stat-all {
-        background: url("../../img/stat_all.jpg");
+        //background: url("../../img/stat_all.jpg");
+        background: var(--profile_block_background);
         @extend %background-center-cover;
     }
     .online {

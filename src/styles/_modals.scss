@@ -1,8 +1,4 @@
-body[scheme="space_gray"] {
-    .vkuiModalPage__in {
-        background: var(--modal_background);
-    }
-}
+
 
 .vkuiModalPage__in {
     background: var(--modal_background);
@@ -13,5 +9,5 @@ body[scheme="space_gray"] {
 
 .vkuiModalPageHeader__in {
     background-color: var(--modal_header_background);
-    border-radius: var(--br);
+    border-radius: var(--br) var(--br) 0 0;
 }

@@ -1,7 +1,8 @@
 body[scheme="bright_light"],
 body[scheme="vkcom_light"],
 body[scheme="vkcom_dark"],
-body[scheme="space_gray"] {
+body[scheme="space_gray"],
+body {
     // variables
     --menu_button_background: #262b37;
     --game_button_background: transparent;
@@ -12,6 +13,7 @@ body[scheme="space_gray"] {
     --stat_background: #1e222b;
     --balance_block_background: #e5e5e5;
     --table_block_background: #e5e5e5;
+    --profile_block_background: #262b37;
     // vk ui
     --background_content: #20242d;
     --header_background: #20242d;

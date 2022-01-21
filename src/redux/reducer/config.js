@@ -1,6 +1,6 @@
 const init = {
-  xhr_url: "http://localhost:8080/server/api.php",
-  ws_url: "http://localhost:8080/",
+  xhr_url: "https://ed13-77-238-131-241.ngrok.io/server/api.php",
+  ws_url: "https://ed13-77-238-131-241.ngrok.io/",
   appId: 8020410,
   globalData: {},
   loading: false,
